@@ -8,7 +8,7 @@
         <main class="px-3">
 
             <img src="/images/logo.jpg" alt="Khalifah Aulad" height="200" width="200">
-            <h1>Khalifah Aulad Management System</h1>
+            <h1>Khalifah Aulad</h1>
             <p sec:authorize="isAnonymous()" class="lead">Welcome. Please <a th:href="@{/login}">login</a> with your registered account.</p>
             <p sec:authorize="!hasRole('ADMIN') and isAuthenticated()">Welcome,
                 [[${#request.userPrincipal.principal.fullName}]].</p>

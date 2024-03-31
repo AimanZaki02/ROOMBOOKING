@@ -18,4 +18,9 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/secondindex")
+    public String secondIndex() {
+        return "secondindex";
+    }
+
 }
