@@ -7,13 +7,65 @@
         <header th:replace="public-nav :: public-nav"></header>
         <main class="px-3">
 
+<<<<<<< Updated upstream
             <img src="/images/logo.jpg" alt="Khalifah Aulad" height="200" width="200">
             <h1>Khalifah Aulad</h1>
             <p sec:authorize="isAnonymous()" class="lead">Welcome. Please <a th:href="@{/login}">login</a> with your registered account.</p>
+=======
+            <img src="/images/UPTMLOGO.png" alt="UPTMLOGO" height="100" width="200">
+            <h1>Venue Booking System</h1>
+            <p sec:authorize="isAnonymous()" class="lead">Selamat Datang. Sila <a th:href="@{/login}">Log Masuk</a> mengunakan akaun pelajar anda.</p>
+>>>>>>> Stashed changes
             <p sec:authorize="!hasRole('ADMIN') and isAuthenticated()">Welcome,
                 [[${#request.userPrincipal.principal.fullName}]].</p>
-            <p sec:authorize="hasRole('ADMIN')">Welcome, Admin.</p>
+            <p sec:authorize="hasRole('ADMIN')">Selamat, Admin.</p>
         </main>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dropdown Menu Example</title>
+        <style>
+            /* CSS for dropdown menu */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 120px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        </style>
+        </head>
+        <body>
+
+        <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+                <a href="#">Option 1</a>
+                <a href="#">Option 2</a>
+                <a href="#">Option 3</a>
+            </div>
+        </div>
 
         <footer th:replace="public-footer :: public-footer"></footer>
     </div>
@@ -22,5 +74,8 @@
     <h1>Library Management System</h1>
     <a class="h2" th:href="@{/users}">Manage Users</a>
 </div>-->
+
+
+
 </body>
 </html>
