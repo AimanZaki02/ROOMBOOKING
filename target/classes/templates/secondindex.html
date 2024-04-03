@@ -9,59 +9,39 @@
             rel="stylesheet"
     />
     <link rel="stylesheet" type="text/css" href="/css/home.css">
-    <title>Web Design Mastery | Rayal Park</title>
+    <title>UPTMVBS</title>
 </head>
 <body>
 <header class="header">
     <nav>
         <div class="nav__bar">
             <div class="logo">
-                <a href="#"><img src="/images/logo.png" alt="logo" /></a>
+                <a href="#"><img src="/images/UPTMLOGO.png" alt="logo" /></a>
             </div>
-            <div class="nav__menu__btn" id="menu-btn">
+            <div class="nav__menu__btn" id="me  nu-btn">
                 <i class="ri-menu-line"></i>
             </div>
         </div>
         <ul class="nav__links" id="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#service">Services</a></li>
+            <li><a href="#room">Venue</a></li>
             <li><a href="#explore">Explore</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li sec:authorize="isAnonymous()" class="lead"><a th:href="@{/login}">Login</a></li>
         </ul>
         <button class="btn nav__btn">Book Now</button>
     </nav>
     <div class="section__container header__container" id="home">
-        <p>Simple - Unique - Friendly</p>
-        <h1>Make Yourself At Home<br />In Our <span>Hotel</span>.</h1>
+        <p>Trustworthy● Caring ● Resilient ● Respected</p>
+        <h1>Welcome To <span>UPTM</span> <br />Venue Booking System.</h1>
     </div>
 </header>
 
 <section class="section__container booking__container">
     <form action="/" class="booking__form">
-        <div class="input__group">
-            <span><i class="ri-calendar-2-fill"></i></span>
-            <div>
-                <label for="check-in">CHECK-IN</label>
-                <input type="text" placeholder="Check In" />
-            </div>
-        </div>
-        <div class="input__group">
-            <span><i class="ri-calendar-2-fill"></i></span>
-            <div>
-                <label for="check-out">CHECK-OUT</label>
-                <input type="text" placeholder="Check Out" />
-            </div>
-        </div>
-        <div class="input__group">
-            <span><i class="ri-user-fill"></i></span>
-            <div>
-                <label for="guest">GUEST</label>
-                <input type="text" placeholder="Guest" />
-            </div>
-        </div>
         <div class="input__group input__btn">
-            <button class="btn">CHECH OUT</button>
+            <a>Need to book space for your upcoming event or project?</a><button sec:authorize="isAnonymous()" class="btn" ><a th:href="@{/login}">Click Here to Book!</a></button>
         </div>
     </form>
 </section>
@@ -71,23 +51,20 @@
         <img src="/images/about.jpg" alt="about" />
     </div>
     <div class="about__content">
-        <p class="section__subheader">ABOUT US</p>
-        <h2 class="section__header">The Best Holidays Start Here!</h2>
+        <p class="section__subheader">About Our System</p>
+        <h2 class="section__header">Now more easy!</h2>
         <p class="section__description">
-            With a focus on quality accommodations, personalized experiences, and
-            seamless booking, our platform is dedicated to ensuring that every
-            traveler embarks on their dream holiday with confidence and
-            excitement.
-        </p>
+            The UPTM Venue Booking System is tailored for the UPTM Community, comprising students, lecturers, and staff.
+            We intend to enhance the venue booking system for increased convenience and eliminate redundant booking problems present in the current offline approach.        </p>
         <div class="about__btn">
             <button class="btn">Read More</button>
         </div>
     </div>
 </section>
 
-<section class="section__container room__container">
-    <p class="section__subheader">OUR LIVING ROOM</p>
-    <h2 class="section__header">The Most Memorable Rest Time Starts Here.</h2>
+<section class="section__container room__container" id="room">
+    <p class="section__subheader">UPTM Venues</p>
+    <h2 class="section__header">Exciting and Educational Event Starts Here.</h2>
     <div class="room__grid">
         <div class="room__card">
             <div class="room__card__image">
@@ -99,10 +76,12 @@
                 </div>
             </div>
             <div class="room__card__details">
-                <h4>Deluxe Ocean View</h4>
+                <h4>Room 1</h4>
+                <div class="about__image">
+                    <img src="/images/UPTMBG.jpeg" alt="about" />
+                </div>
                 <p>
-                    Bask in luxury with breathtaking ocean views from your private
-                    suite.
+                    Desc here.
                 </p>
                 <h5>Starting from <span>$299/night</span></h5>
                 <button class="btn">Book Now</button>
@@ -118,10 +97,12 @@
                 </div>
             </div>
             <div class="room__card__details">
-                <h4>Executive Cityscape Room</h4>
+                <h4>Room 2</h4>
+                <div class="about__image">
+                    <img src="/images/UPTMBG.jpeg" alt="about" />
+                </div>
                 <p>
-                    Experience urban elegance and modern comfort in the heart of the
-                    city.
+                    Desc here.
                 </p>
                 <h5>Starting from <span>$199/night</span></h5>
                 <button class="btn">Book Now</button>
@@ -137,58 +118,16 @@
                 </div>
             </div>
             <div class="room__card__details">
-                <h4>Family Garden Retreat</h4>
+                <h4>Room 3</h4>
+                <div class="about__image">
+                    <img src="/images/UPTMBG.jpeg" alt="about" />
+                </div>
                 <p>
-                    Spacious and inviting, perfect for creating cherished memories
-                    with loved ones.
+                    Desc here
                 </p>
                 <h5>Starting from <span>$249/night</span></h5>
                 <button class="btn">Book Now</button>
             </div>
-        </div>
-    </div>
-</section>
-
-<section class="service" id="service">
-    <div class="section__container service__container">
-        <div class="service__content">
-            <p class="section__subheader">SERVICES</p>
-            <h2 class="section__header">Strive Only For The Best.</h2>
-            <ul class="service__list">
-                <li>
-                    <span><i class="ri-shield-star-line"></i></span>
-                    High Class Security
-                </li>
-                <li>
-                    <span><i class="ri-24-hours-line"></i></span>
-                    24 Hours Room Service
-                </li>
-                <li>
-                    <span><i class="ri-headphone-line"></i></span>
-                    Conference Room
-                </li>
-                <li>
-                    <span><i class="ri-map-2-line"></i></span>
-                    Tourist Guide Support
-                </li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<section class="section__container banner__container">
-    <div class="banner__content">
-        <div class="banner__card">
-            <h4>25+</h4>
-            <p>Properties Available</p>
-        </div>
-        <div class="banner__card">
-            <h4>350+</h4>
-            <p>Bookings Completed</p>
-        </div>
-        <div class="banner__card">
-            <h4>600+</h4>
-            <p>Happy Customers</p>
         </div>
     </div>
 </section>
@@ -240,7 +179,7 @@
         <div class="footer__col">
             <h4>CONTACT US</h4>
             <ul class="footer__links">
-                <li><a href="#">rayalpark@info.com</a></li>
+                <li><a href="#">uptm.edu.my</a></li>
             </ul>
             <div class="footer__socials">
 <!--                <a href="#"><img src="assets/facebook.png" alt="facebook" /></a>-->

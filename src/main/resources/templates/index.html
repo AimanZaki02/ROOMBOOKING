@@ -7,21 +7,15 @@
         <header th:replace="public-nav :: public-nav"></header>
         <main class="px-3">
 
-<<<<<<< Updated upstream
-            <img src="/images/logo.jpg" alt="Khalifah Aulad" height="200" width="200">
-            <h1>Khalifah Aulad</h1>
-            <p sec:authorize="isAnonymous()" class="lead">Welcome. Please <a th:href="@{/login}">login</a> with your registered account.</p>
-=======
+
             <img src="/images/UPTMLOGO.png" alt="UPTMLOGO" height="100" width="200">
             <h1>Venue Booking System</h1>
             <p sec:authorize="isAnonymous()" class="lead">Selamat Datang. Sila <a th:href="@{/login}">Log Masuk</a> mengunakan akaun pelajar anda.</p>
->>>>>>> Stashed changes
+
             <p sec:authorize="!hasRole('ADMIN') and isAuthenticated()">Welcome,
                 [[${#request.userPrincipal.principal.fullName}]].</p>
             <p sec:authorize="hasRole('ADMIN')">Selamat, Admin.</p>
         </main>
-
-
 
         <footer th:replace="public-footer :: public-footer"></footer>
     </div>

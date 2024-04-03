@@ -61,7 +61,7 @@
   font-size: 1rem;
   font-weight: 500;
   color: var(--white);
-  background-color: var(--primary-color);
+  background-image: radial-gradient(circle, #00c8ff, #00d7ff, #00e5fd, #00f3f5, #00ffe8);
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
@@ -94,7 +94,7 @@ body {
 }
 
 .header {
-  background-image: url("/images/header.jpg");
+  background-image: url("/images/UPTMEVO.gif");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -185,6 +185,8 @@ nav {
 }
 
 .booking__form {
+  background-image: radial-gradient(circle, #005be3, #3273e9, #538aec, #73a1ee, #93b7ee);
+  color: white;
   padding: 2rem;
   display: flex;
   gap: 1rem;
