@@ -1,1 +1,5 @@
-com\library\Room\Booking.class
+com\library\Room\RoomService.class
+com\library\Room\RoomController.class
+com\library\Room\Room.class
+com\library\Room\RoomRepository.class
+com\library\Room\RoomNotFoundException.class
