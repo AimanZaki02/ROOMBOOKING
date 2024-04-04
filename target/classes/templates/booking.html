@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <title>Book Now | Rayal Park</title>
+</head>
+<body>
+<header class="header">
+    <!-- Copy the entire <nav>...</nav> block from your homepage here -->
+</header>
+
+<section class="section__container booking__container">
+    <h2 class="section__header">Book Your Stay</h2>
+    <form action="/submit-booking" method="post" class="booking__form">
+        <!-- Insert your form inputs here -->
+        <div class="input__group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+        </div>
+        <div class="input__group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        </div>
+        <div class="input__group">
+            <label for="check-in">Check-In</label>
+            <input type="date" id="check-in" name="check-in" required />
+        </div>
+        <div class="input__group">
+            <label for="check-out">Check-Out</label>
+            <input type="date" id="check-out" name="check-out" required />
+        </div>
+        <div class="input__group">
+            <label for="guests">Guests</label>
+            <input type="number" id="guests" name="guests" min="1" placeholder="Number of guests" required />
+        </div>
+        <div class="input__group input__btn">
+            <button type="submit" class="btn">Submit</button>
+        </div>
+    </form>
+</section>
+
+<footer class="footer">
+    <!-- Copy the entire <footer>...</footer> block from your homepage here -->
+</footer>
+
+<script src="/js/booking.js"></script> <!-- If you have specific JS for booking page -->
+</body>
+</html>
