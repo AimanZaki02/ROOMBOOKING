@@ -50,7 +50,7 @@
 
 <section class="section__container about__container" id="about">
     <div class="about__image">
-        <img src="/images/about.jpg" alt="about" />
+        <img src="/images/UPTMBG.jpeg" alt="about" />
     </div>
     <div class="about__content">
         <p class="section__subheader">About Our System</p>
@@ -85,6 +85,39 @@
         </div>
     </form>
 </section>
+
+<section class="section__container booking__container">
+<form th:action="@{/room}" method="post" th:object="${room}">
+    <div class="container p-3">
+        <h1 class="mb-3">Add Room</h1>
+
+        <div class="mb-3 row">
+            <label for="code" class="col-sm-2 col-form-label">Room Code</label>
+            <div class="col-sm-10">
+                <input type="text" name="code" id="code" class="form-control" placeholder="Enter room code">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="location" class="col-sm-2 col-form-label">Location</label>
+            <div class="col-sm-10">
+                <input type="text" name="location" id="location" class="form-control" placeholder="Enter location">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="capacity" class="col-sm-2 col-form-label">Capacity</label>
+            <div class="col-sm-10">
+                <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Enter capacity">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div>
+                <button type="submit" class="btn btn-primary mb-3 text-uppercase" style="width:120px;">Add</button>
+            </div>
+        </div>
+    </div>
+</form>
+</section>
+
 
 
 <section class="section__container room__container" id="room">

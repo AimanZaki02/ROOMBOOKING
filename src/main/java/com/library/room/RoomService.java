@@ -1,6 +1,13 @@
 package com.library.room;
 
+import com.library.room.RoomNotFoundException;
+import com.library.room.Room;
+import com.library.room.RoomNotFoundException;
+import com.library.room.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +31,16 @@ public class RoomService {
         return repo.findById(id).orElseThrow(RoomNotFoundException::new);
     }
 
+    public static final int SEARCH_RESULT_PER_PAGE = 10;
+
+    public Page<Room> search(String keyword, int pageNum) {
+        Pageable pageable = PageRequest.of(pageNum - 1, SEARCH_RESULT_PER_PAGE);
+        return repo.search(keyword, pageable);
+    }
+
     public void delete(Integer id) throws RoomNotFoundException {
-        if (!repo.existsById(id)) {
+        Long count = repo.countById(id);
+        if (count == null || count == 0) {
             throw new RoomNotFoundException();
         }
         repo.deleteById(id);
