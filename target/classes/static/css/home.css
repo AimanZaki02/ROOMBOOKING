@@ -20,7 +20,21 @@
   margin: auto;
   padding: 5rem 1rem;
 }
+ .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* Or adjust to your needs */
+ }
 
+.form-container {
+      width: 100%; /* Or max-width for larger viewports */
+      max-width: 500px; /* Adjust based on your design */
+      padding: 2rem;
+      background: #fff; /* Or any other background */
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+  }
 .section__subheader {
   margin-bottom: 0.5rem;
   position: relative;
@@ -598,7 +612,10 @@ nav {
   .footer__container {
     grid-template-columns: repeat(4, 1fr);
   }
+
+
 }
+
 
 @media (width > 1024px) {
   .room__grid {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,25 +64,28 @@
     </div>
 </section>
 
-<h2>Add New Room</h2>
 <!-- The action in form should be the URL mapped to the POST method in your Spring Controller -->
-<form action="/saveRoom" method="post">
-    <div>
-        <label for="code">Room Code:</label>
-        <input type="text" id="code" name="code" required maxlength="50">
-    </div>
-    <div>
-        <label for="location">Location:</label>
-        <input type="text" id="location" name="location" required maxlength="100">
-    </div>
-    <div>
-        <label for="capacity">Capacity:</label>
-        <input type="number" id="capacity" name="capacity" required>
-    </div>
-    <div>
-        <button type="submit">Submit</button>
-    </div>
-</form>
+<section class="section__container booking__container">
+    <h2 class="section__header">Add New Room</h2>
+    <form th:action="@{/room}" method="post" class="booking__form">
+        <div class="input__group">
+            <label for="code" class="section__description">Room Code:</label>
+            <input type="text" id="code" name="code" required maxlength="50" class="input__group input">
+        </div>
+        <div class="input__group">
+            <label for="location" class="section__description">Location:</label>
+            <input type="text" id="location" name="location" required maxlength="100" class="input__group input">
+        </div>
+        <div class="input__group">
+            <label for="capacity" class="section__description">Capacity:</label>
+            <input type="number" id="capacity" name="capacity" required class="input__group input">
+        </div>
+        <div>
+            <button type="submit" class="btn">Submit</button>
+        </div>
+    </form>
+</section>
+
 
 <section class="section__container room__container" id="room">
     <p class="section__subheader">UPTM Venues</p>
