@@ -6,16 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Controller
 public class RoomController {
-
+    private static final Logger logger = LoggerFactory.getLogger(RoomController.class);
     @Autowired
     private RoomService roomService;
 
@@ -26,10 +30,24 @@ public class RoomController {
     }
 
     @PostMapping("/saveRoom")
-    public String saveRoom(Room room, RedirectAttributes redirectAttributes) {
-        roomService.save(room);
-        redirectAttributes.addFlashAttribute("message", "Room saved successfully!");
-        return "redirect:/secondindex"; // Redirect to prevent duplicate submissions
+    public String saveRoom(@ModelAttribute Room room, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(error -> {
+                logger.error("Validation error: " + error.toString());
+            });
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.room", bindingResult);
+            redirectAttributes.addFlashAttribute("room", room);
+            return "secondIndex";
+        }
+        try {
+            roomService.save(room);
+            redirectAttributes.addFlashAttribute("message", "Room saved successfully!");
+            return "secondIndex";
+        } catch (Exception e) {
+            logger.error("Exception occurred during room save", e);
+            redirectAttributes.addFlashAttribute(" errorMessage", "Error saving room: " + e.getMessage());
+            return "secondIndex";
+        }
     }
 
     // Map HTTP GET requests for '/student/search/page/{pageNum}'
