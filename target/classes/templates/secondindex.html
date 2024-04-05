@@ -86,39 +86,28 @@
     </form>
 </section>
 
-<!--<section class="section__container booking__container">-->
-<!--<form th:action="@{/room}" method="post" th:object="${room}">-->
-<!--    <div class="container p-3">-->
-<!--        <h1 class="mb-3">Add Room</h1>-->
-
-<!--        <div class="mb-3 row">-->
-<!--            <label for="code" class="col-sm-2 col-form-label">Room Code</label>-->
-<!--            <div class="col-sm-10">-->
-<!--                <input type="text" name="code" id="code" class="form-control" placeholder="Enter room code">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="mb-3 row">-->
-<!--            <label for="location" class="col-sm-2 col-form-label">Location</label>-->
-<!--            <div class="col-sm-10">-->
-<!--                <input type="text" name="location" id="location" class="form-control" placeholder="Enter location">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="mb-3 row">-->
-<!--            <label for="capacity" class="col-sm-2 col-form-label">Capacity</label>-->
-<!--            <div class="col-sm-10">-->
-<!--                <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Enter capacity">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="mb-3 row">-->
-<!--            <div>-->
-<!--                <button type="submit" class="btn btn-primary mb-3 text-uppercase" style="width:120px;">Add</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</form>-->
-<!--</section>-->
-
-
+<div class="row">
+    <div th:unless="${totalItems == 0}">
+        <table class="table table-dark mt-3">
+            <thead>
+            <tr class="table-secondary">
+                <th scope="col">ID</th>
+                <th scope="col">Code</th>
+                <th scope="col">Location</th>
+                <th scope="col">Capacity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room : ${listResult}" class="table table-light">
+                <td>[[${room.id}]]</td>
+                <td>[[${room.code}]]</td>
+                <td>[[${room.location}]]</td>
+                <td>[[${room.capacity}]]</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <section class="section__container room__container" id="room">
     <p class="section__subheader">UPTM Venues</p>
