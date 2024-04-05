@@ -28,9 +28,8 @@
             <li><a href="#room">Venue</a></li>
             <li><a href="#explore">Explore</a></li>
             <li><a href="#contact">Contact</a></li>
-<!--            <li sec:authorize="isAnonymous()" class="lead"><a th:href="@{/login}">Login</a></li>-->
         </ul>
-        <button class="btn nav__btn">Book Now</button>
+        <button sec:authorize="isAnonymous()" class="btn"><a th:href="@{/login}">Login</a></button>
     </nav>
     <div class="section__container header__container" id="home">
         <p>Trustworthy● Caring ● Resilient ● Respected</p>
@@ -41,7 +40,7 @@
 <section class="section__container booking__container">
     <form action="/" class="booking__form">
         <div class="input__group input__btn">
-<!--            <a>Need to book space for your upcoming event or project?</a><button sec:authorize="isAnonymous()" class="btn" ><a th:href="@{/login}">Click Here to Book!</a></button>-->
+            <a>Need to book space for your upcoming event or project?</a><button sec:authorize="isAnonymous()" class="btn" ><a th:href="@{/login}">Click Here to Book!</a></button>
         </div>
     </form>
 </section>
@@ -115,18 +114,10 @@
     <div class="room__grid">
         <div class="room__card">
             <div class="room__card__image">
-<!--                <img src="assets/room-1.jpg" alt="room" />-->
-                <div class="room__card__icons">
-                    <span><i class="ri-heart-fill"></i></span>
-                    <span><i class="ri-paint-fill"></i></span>
-                    <span><i class="ri-shield-star-line"></i></span>
-                </div>
+              <img src="/images/UPTMBG.jpeg" alt="room" />
             </div>
             <div class="room__card__details">
                 <h4>Room 1</h4>
-                <div class="about__image">
-                    <img src="/images/UPTMBG.jpeg" alt="about" />
-                </div>
                 <p>
                     Desc here.
                 </p>
@@ -136,43 +127,27 @@
         </div>
         <div class="room__card">
             <div class="room__card__image">
-<!--                <img src="assets/room-2.jpg" alt="room" />-->
-                <div class="room__card__icons">
-                    <span><i class="ri-heart-fill"></i></span>
-                    <span><i class="ri-paint-fill"></i></span>
-                    <span><i class="ri-shield-star-line"></i></span>
-                </div>
+                <img src="/images/UPTMBG.jpeg" alt="room" />
             </div>
             <div class="room__card__details">
                 <h4>Room 2</h4>
-                <div class="about__image">
-                    <img src="/images/UPTMBG.jpeg" alt="about" />
-                </div>
                 <p>
                     Desc here.
                 </p>
-                <h5>Starting from <span>$199/night</span></h5>
+                <h5>Starting from <span>$299/night</span></h5>
                 <button class="btn">Book Now</button>
             </div>
         </div>
         <div class="room__card">
             <div class="room__card__image">
-<!--                <img src="assets/room-3.jpg" alt="room" />-->
-                <div class="room__card__icons">
-                    <span><i class="ri-heart-fill"></i></span>
-                    <span><i class="ri-paint-fill"></i></span>
-                    <span><i class="ri-shield-star-line"></i></span>
-                </div>
+                <img src="/images/UPTMBG.jpeg" alt="room" />
             </div>
             <div class="room__card__details">
                 <h4>Room 3</h4>
-                <div class="about__image">
-                    <img src="/images/UPTMBG.jpeg" alt="about" />
-                </div>
                 <p>
-                    Desc here
+                    Desc here.
                 </p>
-                <h5>Starting from <span>$249/night</span></h5>
+                <h5>Starting from <span>$299/night</span></h5>
                 <button class="btn">Book Now</button>
             </div>
         </div>
@@ -229,10 +204,10 @@
                 <li><a href="#">uptm.edu.my</a></li>
             </ul>
             <div class="footer__socials">
-<!--                <a href="#"><img src="assets/facebook.png" alt="facebook" /></a>-->
-<!--                <a href="#"><img src="assets/instagram.png" alt="instagram" /></a>-->
-<!--                <a href="#"><img src="assets/youtube.png" alt="youtube" /></a>-->
-<!--                <a href="#"><img src="assets/twitter.png" alt="twitter" /></a>-->
+                <a href="#"><img src="assets/facebook.png" alt="facebook" /></a>
+               <a href="#"><img src="assets/instagram.png" alt="instagram" /></a>
+               <a href="#"><img src="assets/youtube.png" alt="youtube" /></a>
+                <a href="#"><img src="assets/twitter.png" alt="twitter" /></a>
             </div>
         </div>
     </div>

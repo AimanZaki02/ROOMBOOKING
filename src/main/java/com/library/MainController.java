@@ -15,7 +15,7 @@ public class MainController {
     public String showHomePage(){
 
         // Return templates/index.html
-        return "index";
+        return "secondindex";
     }
 
     @GetMapping("/secondindex")
