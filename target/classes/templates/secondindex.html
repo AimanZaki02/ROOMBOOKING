@@ -9,7 +9,9 @@
             rel="stylesheet"
     />
     <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>UPTMVBS</title>
+
 </head>
 <body>
 <header class="header">
@@ -240,6 +242,28 @@
         Copyright © 2023 Web Design Mastery. All rights reserved.
     </div>
 </footer>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var swalAttribute = /*[[${swal}]]*/ 'none';
+    var message = /*[[${message}]]*/ 'default message';
+    console.log('Swal attribute:', swalAttribute);
+    console.log('Message:', message);
+
+    if (swalAttribute === 'success') {
+        Swal.fire({
+            title: 'Success!',
+            text: message !== 'default message' ? message : 'Action completed successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(function(result) {
+            if (result.isConfirmed) {
+                window.location.href = '/secondindex';
+            }
+        });
+    }
+    /*]]>*/
+</script>
+
 
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="/js/secondindex.js"></script>
