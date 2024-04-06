@@ -9,12 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import java.time.LocalDate;
+import java.util.List;
+import com.library.roombookings.RoomBookings;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-
+    @Autowired
+    private RoomBookingsService roomBookingsService;
     @Autowired
     private RoomService roomService;
 
@@ -62,6 +67,17 @@ public class MainController {
     @GetMapping("/liveTracking")
     public String liveTracking(Model model) {
         logger.debug("Entering liveTracking method");
-        return "liveTracking";
+        try {
+            LocalDate today = LocalDate.now();
+            List<RoomBookings> liveBookings = roomBookingsService.getLiveBookings();
+            logger.debug("liveBookings fetched, count: {}", liveBookings.size());
+
+            model.addAttribute("liveBookings", liveBookings);
+            return "liveTracking";
+        } catch (Exception e) {
+            logger.error("Error in liveTracking", e);
+            model.addAttribute("errorMessage", "Error retrieving live bookings: " + e.getMessage());
+            return "error";
+        }
     }
 }

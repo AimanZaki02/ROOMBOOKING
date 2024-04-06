@@ -22,8 +22,11 @@ public interface RoomBookingsRepository extends JpaRepository<RoomBookings, Inte
     Page<RoomBookings> search(String keyword, Pageable pageable);
 
     // Method to find live bookings for a given date
-    @Query("SELECT rb FROM RoomBookings rb WHERE rb.bookingDate = :date")
+    // In RoomBookingsRepository.java
+
+    @Query(value = "SELECT * FROM room_bookings WHERE booking_date = CAST(:date AS DATE)", nativeQuery = true)
     List<RoomBookings> findLiveBookings(@Param("date") LocalDate date);
+
 
     // Method to count bookings by ID - you already have this
     Long countById(Integer id);

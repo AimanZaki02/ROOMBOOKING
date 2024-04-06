@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Live Room Tracking - UPTMVBS</title>
-    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/secondindex.css">
 
 </head>
 <body>
@@ -32,46 +32,23 @@
 <section class="section__container">
     <h2 class="section__header">Live Room Booking Tracking</h2>
     <div class="room__grid">
-        <!-- Dynamically populate this section with live tracking data -->
-        <div th:each="booking : ${liveBookings}" class="room__card">
+        <!-- Iterate over the map of grouped bookings -->
+        <div th:each="roomEntry : ${liveBookings}" class="room__card">
             <div class="room__card__details">
-                <h4 th:text="${booking.roomCode}"></h4>
-                <p th:text="'Booked by: ' + ${booking.customerName}"></p>
-                <p th:text="'Date: ' + ${#dates.format(booking.bookingDate, 'dd/MM/yyyy')}"></p>
-                <p th:text="'Time: ' + ${#dates.format(booking.bookingTime, 'HH:mm')}"></p>
-                <span th:class="${booking.status == 'Booked' ? 'status-booked' : 'status-available'}" th:text="${booking.status}"></span>
+                <!-- Display the room name -->
+                <h4 th:text="${roomEntry.key}"></h4>
+                <!-- Iterate over the bookings for this room -->
+                <div th:each="booking : ${roomEntry.value}">
+                    <p th:text="'Booked by: ' + ${booking.customerName}"></p>
+                    <p th:text="'Date: ' + ${#dates.format(booking.bookingDate, 'dd/MM/yyyy')}"></p>
+                    <p th:text="'Time Start: ' + ${#dates.format(booking.bookingTime, 'HH:mm')} + ' - End: ' + ${#dates.format(booking.bookingEnd, 'HH:mm')}"></p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<div class="section__container table-container">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-            <tr class="table-secondary">
-                <th scope="col">ID</th>
-                <th scope="col">Code</th>
-                <th scope="col">Location</th>
-                <th scope="col">Capacity</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="room : ${rooms}">
-                <td th:text="${room.id}"></td>
-                <td th:text="${room.code}"></td>
-                <td th:text="${room.location}"></td>
-                <td th:text="${room.capacity}"></td>
-                <td>
-                    <a th:href="@{/room/edit/{id}(id=${room.id})}" class="btn btn-primary">Edit</a>
-                    <a th:href="@{/room/delete/{id}(id=${room.id})}" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+
 
 
 <footer class="footer" id="contact">

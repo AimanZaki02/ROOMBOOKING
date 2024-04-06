@@ -8,9 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;  // Import the List class
 import java.time.LocalDate;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class RoomBookingsService {
@@ -51,12 +53,18 @@ public class RoomBookingsService {
         logger.debug("Fetching live bookings for date: {}", today);
         try {
             List<RoomBookings> liveBookings = repo.findLiveBookings(today);
-            logger.debug("Found {} live bookings", liveBookings.size());
+            logger.debug("Found {} live bookings for {}", liveBookings.size(), today);
             return liveBookings;
         } catch (Exception e) {
             logger.error("Error fetching live bookings", e);
-            throw e; // Rethrow the exception or handle it appropriately
+            throw e;
         }
     }
+
+    public Map<String, List<RoomBookings>> getLiveBookingsGroupedByRoom() {
+        List<RoomBookings> bookings = getLiveBookings(); // Use your existing method to fetch bookings
+        return bookings.stream().collect(Collectors.groupingBy(RoomBookings::getRoomName));
+    }
+
 
 }
