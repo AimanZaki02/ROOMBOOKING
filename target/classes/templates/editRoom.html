@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Room | UPTMVBS</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+</head>
+<body>
+<header class="header">
+    <nav>
+        <div class="nav__bar">
+            <div class="logo">
+                <a href="#"><img src="/images/UPTMLOGO.png" alt="logo" /></a>
+            </div>
+            <div class="nav__menu__btn" id="me  nu-btn">
+                <i class="ri-menu-line"></i>
+            </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#room">Venue</a></li>
+            <li><a href="#explore">Explore</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button sec:authorize="isAnonymous()" class="btn"><a th:href="@{/login}">Login</a></button>
+    </nav>
+</header>
+
+<section class="edit-section">
+    <div class="edit-container">
+        <h2 class="edit-header">Edit Room Details</h2>
+        <form th:action="@{/room/update/{id}(id=${room.id})}" th:object="${room}" method="post" class="edit-form">
+            <div class="form-group">
+                <label for="code">Room Code:</label>
+                <input type="text" id="code" th:field="*{code}" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" th:field="*{location}" required>
+            </div>
+            <div class="form-group">
+                <label for="capacity">Capacity:</label>
+                <input type="number" id="capacity" th:field="*{capacity}" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Update Room</button>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>
