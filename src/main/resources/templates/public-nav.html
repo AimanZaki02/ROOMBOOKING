@@ -13,6 +13,10 @@
                th:classappend="${#httpServletRequest.getRequestURI().contains('/subject') and !#httpServletRequest.getRequestURI().contains('/admin') ? 'active':''}"
                class="nav-link" th:href="@{/subject}">Class</a>
 
+            <a sec:authorize="isAuthenticated()"
+               th:classappend="${#httpServletRequest.getRequestURI().contains('/makebooking') and !#httpServletRequest.getRequestURI().contains('/admin') ? 'active':''}"
+               class="nav-link" th:href="@{/makebooking}">Make Booking</a>
+
             <a sec:authorize="isAnonymous()"
                th:classappend="${#httpServletRequest.getRequestURI().contains('/login') or #httpServletRequest.getRequestURI().contains('/register') ? 'active':''}" class="nav-link"
                th:href="@{/login}">Login</a>

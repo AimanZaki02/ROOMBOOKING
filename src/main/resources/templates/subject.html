@@ -1,149 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <head th:replace="public-head" :: public-head/>
-    <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
-            rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="/css/home.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>UPTMVBS</title>
-
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public-head" :: public-head>
+    <!-- Head elements including stylesheets and meta tags -->
+    <link rel="stylesheet" type="text/css" href="/css/stubooking.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
 </head>
-<body>
-<header class="header">
-    <nav>
-        <div class="nav__bar">
-            <div class="logo">
-                <a href="#"><img src="/images/UPTMLOGO.png" alt="logo" /></a>
-            </div>
-            <div class="nav__menu__btn" id="me  nu-btn">
-                <i class="ri-menu-line"></i>
-            </div>
-        </div>
-        <ul class="nav__links" id="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#room">Venue</a></li>
-            <li><a href="#explore">Explore</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button sec:authorize="isAnonymous()" class="btn"><a th:href="@{/login}">Login</a></button>
-    </nav>
-    <div class="section__container header__container" id="home">
-        <p>Trustworthy● Caring ● Resilient ● Respected</p>
-        <h1>Welcome To <span>UPTM</span> <br />Venue Booking System.</h1>
-    </div>
-</header>
+<body class="d-flex h-100 text-center text-white bg-dark">
 
+<div class="w-100 h-100 img-wrap">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
-<div class="section__container table-container">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-            <tr class="table-secondary">
-                <th scope="col">ID</th>
-                <th scope="col">Code</th>
-                <th scope="col">Location</th>
-                <th scope="col">Capacity</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="room : ${rooms}">
-                <td th:text="${room.id}"></td>
-                <td th:text="${room.code}"></td>
-                <td th:text="${room.location}"></td>
-                <td th:text="${room.capacity}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <!-- Header Section -->
+        <header th:replace="public-nav :: public-nav"></header>
+
+        <!-- Main Content -->
+        <main class="px-3">
+
+            <section class="section__container search-and-results-container">
+                <!-- Left: Search Rooms Subsection -->
+                <div class="search-container">
+                    <h2 class="section__header">Search Rooms</h2>
+                    <form th:action="@{/room/search/page/1}" method="get" class="search-form">
+                        <div class="input__group">
+                            <input type="text" name="keyword" placeholder="Search by code, location, etc." class="search-input">
+                            <button type="submit" class="btn search-btn">Search</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right: Search Results Subsection -->
+                <div class="results-container" th:if="${rooms != null}">
+                    <h2 class="section__header">Search Results</h2>
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(rooms)}">
+                        <table class="table">
+                            <!-- Table Headers -->
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Code</th>
+                                <th>Location</th>
+                                <th>Capacity</th>
+                            </tr>
+                            </thead>
+                            <!-- Table Body -->
+                            <tbody>
+                            <tr th:each="room : ${rooms}">
+                                <td th:text="${room.id}"></td>
+                                <td th:text="${room.code}"></td>
+                                <td th:text="${room.location}"></td>
+                                <td th:text="${room.capacity}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:unless="${not #lists.isEmpty(rooms)}">
+                        <p>No results found.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer Section -->
+        <footer th:replace="public-footer :: public-footer"></footer>
+
     </div>
 </div>
 
-<section class="section__container form-container">
-    <h2 class="section__header">Book a Room</h2>
-    <form action="/bookRoom" method="post" class="booking-form">
-        <div class="input__group">
-            <label for="roomCode" class="section__description">Room Code:</label>
-            <input type="text" id="roomCode" name="room_code" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="roomName" class="section__description">Room Name:</label>
-            <input type="text" id="roomName" name="room_name" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="customerName" class="section__description">Your Name:</label>
-            <input type="text" id="customerName" name="customer_name" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="phoneNumber" class="section__description">Phone Number:</label>
-            <input type="tel" id="phoneNumber" name="phone_number" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="bookingDate" class="section__description">Date:</label>
-            <input type="date" id="bookingDate" name="booking_date" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="bookingTime" class="section__description">Time:</label>
-            <input type="time" id="bookingTime" name="booking_time" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <button type="submit" class="btn">Book Now</button>
-        </div>
-    </form>
-</section>
-
-
-<footer class="footer" id="contact">
-    <div class="section__container footer__container">
-        <div class="footer__col">
-            <div class="logo">
-                <a href="#home"><img src="/images/UPTMLOGO.png" alt="logo" /></a>
-            </div>
-            <h4>Connect With Us</h4>
-            <p class="section__description">
-                Jalan 6/91, Taman Shamelin Perkasa, 56100 Cheras, Kuala Lumpur
-                General Line: +603 9206 9700
-                Tel : +603 92837186 (Marketing)
-                >Fax : +603 92810475
-                E-mail : marketing@uptm.edu.my
-            </p>
-
-        </div>
-    </div>
-    </div>
-    <div class="footer__bar">
-        Copyright © University Poly-Tech Malaysia 2024. All rights reserved.
-    </div>
-</footer>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var swalAttribute = /*[[${swal}]]*/ 'none';
-    var message = /*[[${message}]]*/ 'default message';
-    console.log('Swal attribute:', swalAttribute);
-    console.log('Message:', message);
-
-    if (swalAttribute === 'success') {
-        Swal.fire({
-            title: 'Success!',
-            text: message !== 'default message' ? message : 'Action completed successfully!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(function(result) {
-            if (result.isConfirmed) {
-                window.location.href = '/secondindex';
-            }
-        });
-    }
-    /*]]>*/
-</script>
-
-
-<script src="https://unpkg.com/scrollreveal"></script>
-<script src="/js/secondindex.js"></script>
 </body>
 </html>

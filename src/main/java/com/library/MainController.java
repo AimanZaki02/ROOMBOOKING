@@ -29,4 +29,15 @@ public class MainController {
         model.addAttribute("rooms", roomService.listAll()); // Add this line to pass rooms data
         return "secondindex";
     }
+
+    @GetMapping("/makebooking")
+    public String makebooking(Model model, @ModelAttribute("message") String message,
+                              @ModelAttribute("swal") String swal,
+                              @ModelAttribute("errorMessage") String errorMessage) {
+        // Add room data to the model along with other attributes
+        model.addAttribute("message", message);
+        model.addAttribute("swal", swal);
+        model.addAttribute("errorMessage", errorMessage);
+        return "makebooking";
+    }
 }

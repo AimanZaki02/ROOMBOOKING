@@ -99,6 +99,6 @@ public class RoomController {
             model.addAttribute("totalItems", result.getTotalElements());
             model.addAttribute("keyword", keyword);
         }
-        return "secondindex"; // Use secondindex to render the same page with search results
+        return "subject";// Use secondindex to render the same page with search results
     }
 }
