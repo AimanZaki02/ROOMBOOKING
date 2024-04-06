@@ -3,7 +3,8 @@ package com.library.roombookings;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
-
+@Entity
+@Table(name = "room_bookings")
 public class RoomBookings {
 
     @Id

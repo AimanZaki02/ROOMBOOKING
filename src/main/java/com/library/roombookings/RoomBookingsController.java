@@ -14,33 +14,27 @@ public class RoomBookingsController {
     private static final Logger logger = LoggerFactory.getLogger(RoomBookingsController.class);
 
     @Autowired
-    private RoomBookingsService bookingService;
+    private RoomBookingsService roombookingsService;
 
     // Additional methods and annotations remain the same but renamed to reflect the booking context
 
     @GetMapping("/roombookings")
     public String listBookings(Model model) {
         model.addAttribute("bookings", roombookingsService.listAll());
-        return "roombookings"; // Updated template name
+        return "roombookings"; // Make sure this is the correct view name
     }
 
-    @PostMapping("/saveRoomBookings")
-    public String saveBooking(@ModelAttribute RoomBookings booking, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        // Method body updated with references to RoomBooking and "booking" instead of "room"
-        // ...
-    }
-
-    @GetMapping("/roombookings/edit/{id}")
-    public String editBooking(@PathVariable Integer id, Model model) {
-        try {
-            RoomBookings roombookings = roombookingsService.get(id);
-            model.addAttribute("roombookings", roombookings);
-            return "editRoomBookings"; // Updated template name
-        } catch (RoomBookingsNotFoundException e) {
-            // Exception handling remains the same
-            // ...
-        }
-    }
+//    @GetMapping("/roombookings/edit/{id}")
+//    public String editBooking(@PathVariable Integer id, Model model) {
+//        try {
+//            RoomBookings roombookings = roombookingsService.get(id);
+//            model.addAttribute("roombookings", roombookings);
+//            return "editRoomBookings"; // Updated template name
+//        } catch (RoomBookingsNotFoundException e) {
+//            // Exception handling remains the same
+//            // ...
+//        }
+//    }
 
     // Update and delete methods similarly refactored to match the booking context
 
