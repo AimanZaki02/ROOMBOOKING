@@ -25,9 +25,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 public class LibraryAppApplication {
 
-	// Run the Spring application!
-	public static void main(String[] args) {
-		SpringApplication.run(LibraryAppApplication.class, args);
-	}
 
 }
