@@ -27,7 +27,7 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/secondindex")
+    @GetMapping("/index")
     public String secondIndex(Model model, @ModelAttribute("message") String message,
                               @ModelAttribute("swal") String swal,
                               @ModelAttribute("errorMessage") String errorMessage) {
@@ -35,7 +35,7 @@ public class MainController {
         model.addAttribute("swal", swal);
         model.addAttribute("errorMessage", errorMessage);
         model.addAttribute("rooms", roomService.listAll());
-        return "secondindex";
+        return "index";
     }
 
     @GetMapping("/neosecondindex")
