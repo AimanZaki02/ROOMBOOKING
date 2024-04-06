@@ -1,6 +1,7 @@
 package com.library;
 
 import com.library.room.RoomService; // Import RoomService
+import com.library.roombookings.RoomBookingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,9 @@ public class MainController {
 
     @Autowired
     private RoomService roomService; // Autowire the RoomService
+
+    @Autowired
+    private RoomBookingsService roombookingsService;
 
     @GetMapping("/")
     public String showHomePage() {
@@ -38,6 +42,8 @@ public class MainController {
         model.addAttribute("message", message);
         model.addAttribute("swal", swal);
         model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("rooms", roombookingsService.listAll()); // Add this line to pass rooms data
+
         return "makebooking";
     }
 }
