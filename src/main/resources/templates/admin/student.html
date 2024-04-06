@@ -1,82 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head th:replace="public-head" :: public-head/>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public-head" :: public-head>
+    <!-- Head elements including stylesheets and meta tags -->
+    <link rel="stylesheet" type="text/css" href="/css/stubooking.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
 <body class="d-flex h-100 text-center text-white bg-dark">
 
 <div class="w-100 h-100 img-wrap">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+        <!-- Header Section -->
         <header th:replace="public-nav :: public-nav"></header>
+</head>
+<body class="d-flex h-100 text-center text-white bg-dark">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <!-- Header, Main, and Footer Sections -->
+    <main class="px-3">
 
-        <main class="px-3">
-            <div th:if="${param.add}" class="alert alert-info">
-                Student successfully saved!
-            </div>
-            <div th:if="${param.notExist}" class="alert alert-warning">
-                Student not found!
-            </div>
-            <div th:if="${param.deleted != null}" class="alert alert-danger">
-                Student #[[${param.deleted[0]}]] deleted!
-            </div>
+        <!-- The action in form should be the URL mapped to the POST method in your Spring Controller -->
 
-            <h1 class="mb-3">Manage Student</h1>
-
-            <div class="mt-2 row text-start">
-                <a th:href="@{/admin/student/add}" class="btn btn-primary mb-3 text-uppercase mx-auto mt-auto"
-                   style="width:120px;">Add
-                    Student
-                </a>
-                <div th:if="${totalItems > 0}" class="search w-75 ms-auto">
-                    <form class="form-inline" th:action="@{/admin/student/search}" method="get">
-                        <input type="text" name="keyword" class="form-control" placeholder="Search for a student..."
-                               th:value="${keyword}" required>
-                        <button type="submit" class="btn btn-primary admin-search"><span class="fa fa-search"
-                                                                                         aria-hidden="true"></span>
-                        </button>
-                    </form>
+        <section class="section__container booking__container">
+            <h2 class="section__header">Add New Room</h2>
+            <form th:action="@{/saveRoom}" method="post" class="booking__form">
+                <div class="input__group">
+                    <label for="code">Room Code:</label>
+                    <input type="text" id="code" name="code" required maxlength="50">
                 </div>
+                <div class="input__group">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" required maxlength="100">
+                </div>
+                <div class="input__group">
+                    <label for="capacity">Capacity:</label>
+                    <input type="number" id="capacity" name="capacity" required min="1">
+                </div>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </section>
+
+
+        <div class="search-and-results-container">
+            <section class="section__container search__container">
+                <h2 class="section__header">Search Rooms</h2>
+                <form th:action="@{/room/search/page/1}" method="get" class="search-form">
+                    <div class="input__group">
+                        <select name="keyword" class="search-input">
+                            <option value="">Select a room...</option>
+                            <option value="Room 1">Room 1</option>
+                            <option value="Room 2">Room 2</option>
+                            <option value="Room 3">Room 3</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                        <button type="submit" class="btn search-btn">Search</button>
+                    </div>
+                </form>
+
+
+            <section class="section__container search-results-container" th:if="${rooms != null}">
+            <div class="table-responsive" th:if="${not #lists.isEmpty(rooms)}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Code</th>
+                        <th>Location</th>
+                        <th>Capacity</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="room : ${rooms}">
+                        <td th:text="${room.id}"></td>
+                        <td th:text="${room.code}"></td>
+                        <td th:text="${room.location}"></td>
+                        <td th:text="${room.capacity}"></td>
+                        <td>
+                            <a th:href="@{/room/edit/{id}(id=${room.id})}" class="btn btn-primary">Edit</a>
+                            <a th:href="@{/room/delete/{id}(id=${room.id})}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <div class="row">
-                <div th:unless="${totalItems == 0}">
-                    <table class="table table-dark mt-3">
-                        <thead>
-                        <tr class="table-secondary">
-                            <th scope="col">ID</th>
-                            <th scope="col">Class</th>
-                            <th scope="col">Student Name</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="student : ${listStudent}" class="table table-light">
-                            <td>[[${student.id}]]</td>
-                            <td>[[${student.email}]]</td>
-                            <td>[[${student.name}]]</td>
-                            <td>[[${student.gender}]]</td>
-                            <td><a th:href="@{'/admin/student/edit/' + ${student.id}}"><i class="fa fa-pencil-square-o"
-                                                                                          aria-hidden="true"></i></a><a
-                                    th:href="@{'/admin/student/delete/' + ${student.id}}"><i class="fa fa-trash"
-                                                                                             aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="text-center m-1" th:if="${totalItems > 0}">
-                    <span>Showing [[${totalItems}]] results.</span>
-                </div>
-                <div class="mt-3" th:unless="${totalItems > 0}">
-                    <p>No student found.</p>
-                </div>
-
+            <div th:unless="${not #lists.isEmpty(rooms)}">
+                <p>No results found.</p>
             </div>
-        </main>
-        <footer th:replace="public-footer :: public-footer"></footer>
-    </div>
+        </section>
+
+    </main>
 </div>
-
-
 </body>
 </html>

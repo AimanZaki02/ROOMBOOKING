@@ -16,50 +16,50 @@
         <!-- Main Content -->
         <main class="px-3">
 
-            <section class="section__container search-and-results-container">
-                <!-- Left: Search Rooms Subsection -->
-                <div class="search-container">
-                    <h2 class="section__header">Search Rooms</h2>
-                    <form th:action="@{/room/search/page/1}" method="get" class="search-form">
-                        <div class="input__group">
-                            <input type="text" name="keyword" placeholder="Search by code, location, etc." class="search-input">
-                            <button type="submit" class="btn search-btn">Search</button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Right: Search Results Subsection -->
-                <div class="results-container" th:if="${rooms != null}">
-                    <h2 class="section__header">Search Results</h2>
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(rooms)}">
-                        <table class="table">
-                            <!-- Table Headers -->
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Code</th>
-                                <th>Location</th>
-                                <th>Capacity</th>
-                            </tr>
-                            </thead>
-                            <!-- Table Body -->
-                            <tbody>
-                            <tr th:each="room : ${rooms}">
-                                <td th:text="${room.id}"></td>
-                                <td th:text="${room.code}"></td>
-                                <td th:text="${room.location}"></td>
-                                <td th:text="${room.capacity}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+        <section class="section__container search-and-results-container">
+            <!-- Left: Search Rooms Subsection -->
+            <div class="search-container">
+                <h2 class="section__header">Search Rooms</h2>
+                <form th:action="@{/room/search/page/1}" method="get" class="search-form">
+                    <div class="input__group">
+                        <input type="text" name="keyword" placeholder="Search by code, location, etc." class="search-input">
+                        <button type="submit" class="btn search-btn">Search</button>
                     </div>
-                    <div th:unless="${not #lists.isEmpty(rooms)}">
-                        <p>No results found.</p>
-                    </div>
-                </div>
-            </section>
+                </form>
+            </div>
 
-        </main>
+            <!-- Right: Search Results Subsection -->
+            <div class="results-container" th:if="${rooms != null}">
+                <h2 class="section__header">Search Results</h2>
+                <div class="table-responsive" th:if="${not #lists.isEmpty(rooms)}">
+                    <table class="table">
+                        <!-- Table Headers -->
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Code</th>
+                            <th>Location</th>
+                            <th>Capacity</th>
+                        </tr>
+                        </thead>
+                        <!-- Table Body -->
+                        <tbody>
+                        <tr th:each="room : ${rooms}">
+                            <td th:text="${room.id}"></td>
+                            <td th:text="${room.code}"></td>
+                            <td th:text="${room.location}"></td>
+                            <td th:text="${room.capacity}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:unless="${not #lists.isEmpty(rooms)}">
+                    <p>No results found.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
         <!-- Footer Section -->
         <footer th:replace="public-footer :: public-footer"></footer>

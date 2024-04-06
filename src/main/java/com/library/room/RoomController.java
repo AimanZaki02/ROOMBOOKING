@@ -35,17 +35,17 @@ public class RoomController {
             bindingResult.getAllErrors().forEach(error -> logger.error("Validation error: " + error.toString()));
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.room", bindingResult);
             redirectAttributes.addFlashAttribute("room", room);
-            return "redirect:/secondindex";
+            return "admin/student";
         }
         try {
             roomService.save(room);
             redirectAttributes.addFlashAttribute("swal", "success");
             redirectAttributes.addFlashAttribute("message", "Room saved successfully!");
-            return "redirect:/secondindex";
+            return "admin/student";
         } catch (Exception e) {
             logger.error("Exception occurred during room save", e);
             redirectAttributes.addFlashAttribute("errorMessage", "Error saving room: " + e.getMessage());
-            return "redirect:/secondindex";
+            return "admin/student";
         }
     }
 
@@ -57,7 +57,7 @@ public class RoomController {
             return "editRoom"; // This should be the name of the Thymeleaf template for editing the room
         } catch (RoomNotFoundException e) {
             logger.error("Error finding room: " + e.getMessage());
-            return "redirect:/secondindex";
+            return "admin/student";
         }
     }
 
@@ -71,7 +71,7 @@ public class RoomController {
         } catch (Exception e) {
             logger.error("Error updating room: " + e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "Error updating room: " + e.getMessage());
-            return "redirect:/secondindex";
+            return "admin/student";
         }
     }
 
@@ -99,6 +99,6 @@ public class RoomController {
             model.addAttribute("totalItems", result.getTotalElements());
             model.addAttribute("keyword", keyword);
         }
-        return "subject";// Use secondindex to render the same page with search results
+        return "admin/student";// Use secondindex to render the same page with search results
     }
 }

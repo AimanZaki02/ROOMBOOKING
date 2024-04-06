@@ -12,8 +12,8 @@ public class RoomBookings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "room_code", nullable = false, length = 50)
-    private String roomCode;
+    @Column(name = "room_purpose", nullable = false, length = 50)
+    private String roomPurpose;
 
     @Column(name = "room_name", nullable = false, length = 100)
     private String roomName;
@@ -30,6 +30,9 @@ public class RoomBookings {
     @Column(name = "booking_time", nullable = false)
     private Time bookingTime;
 
+    @Column(name = "booking_end", nullable = false)
+    private Time bookingEnd;
+
     // Getters and setters
 
     public Integer getId() {
@@ -40,12 +43,12 @@ public class RoomBookings {
         this.id = id;
     }
 
-    public String getRoomCode() {
-        return roomCode;
+    public String getRoomPurpose() {
+        return roomPurpose;
     }
 
-    public void setRoomCode(String roomCode) {
-        this.roomCode = roomCode;
+    public void setRoomPurpose(String roomPurpose) {
+        this.roomPurpose = roomPurpose;
     }
 
     public String getRoomName() {
@@ -88,6 +91,14 @@ public class RoomBookings {
         this.bookingTime = bookingTime;
     }
 
+    public Time getBookingEnd() {
+        return bookingEnd;
+    }
+
+    public void setBookingEnd(Time bookingEnd) {
+        this.bookingEnd = bookingEnd;
+    }
+
     // Override equals and hashCode
 
     @Override
@@ -111,12 +122,13 @@ public class RoomBookings {
     public String toString() {
         return "RoomBookings{" +
                 "id=" + id +
-                ", roomCode='" + roomCode + '\'' +
+                ", roomPurpose='" + roomPurpose + '\'' +
                 ", roomName='" + roomName + '\'' + // Add roomName to toString method
                 ", customerName='" + customerName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", bookingDate=" + bookingDate +
                 ", bookingTime=" + bookingTime +
+                ", bookingEnd=" + bookingEnd +
                 '}';
     }
 }

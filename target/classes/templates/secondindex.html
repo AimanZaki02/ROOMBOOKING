@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <head th:replace="public-head" :: public-head/>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/css/home.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+            rel="stylesheet"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/css/secondindex.css">
     <title>UPTMVBS</title>
+
 
 </head>
 <body>
 <header class="header">
+    <header th:replace="public-nav :: public-nav"></header>
     <nav>
         <div class="nav__bar">
             <div class="logo">
@@ -28,11 +33,16 @@
             <li><a href="#explore">Explore</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-        <button sec:authorize="isAnonymous()" class="btn"><a th:href="@{/login}">Login</a></button>
+
     </nav>
     <div class="section__container header__container" id="home">
         <p>Trustworthy● Caring ● Resilient ● Respected</p>
         <h1>Welcome To <span>UPTM</span> <br />Venue Booking System.</h1>
+        <p sec:authorize="isAnonymous()" class="lead">Welcome. Please <a th:href="@{/login}">Log Masuk</a> mengunakan akaun pelajar anda.</p>
+
+        <p sec:authorize="!hasRole('ADMIN') and isAuthenticated()">Welcome,
+            [[${#request.userPrincipal.principal.fullName}]].</p>
+        <p sec:authorize="hasRole('ADMIN')">Welcome, Admin.</p>
     </div>
 </header>
 
@@ -109,39 +119,6 @@
         </table>
     </div>
 </div>
-
-<section class="section__container form-container">
-    <h2 class="section__header">Book a Room</h2>
-    <form action="/bookRoom" method="post" class="booking-form">
-        <div class="input__group">
-            <label for="roomCode" class="section__description">Room Code:</label>
-            <select id="roomCode" name="roomCode" required class="input__group input">
-                <option value="" disabled selected>Select a room</option>
-                <!-- Dynamic room options here -->
-            </select>
-        </div>
-        <div class="input__group">
-            <label for="name" class="section__description">Name:</label>
-            <input type="text" id="name" name="name" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="phone" class="section__description">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="bookingDate" class="section__description">Date:</label>
-            <input type="date" id="bookingDate" name="bookingDate" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="bookingTime" class="section__description">Time:</label>
-            <input type="time" id="bookingTime" name="bookingTime" required class="input__group input">
-        </div>
-        <div class="input__group">
-            <button type="submit" class="btn">Book Now</button>
-        </div>
-    </form>
-</section>
-
 
 <section class="section__container search__container">
     <h2 class="section__header">Search Rooms</h2>

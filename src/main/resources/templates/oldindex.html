@@ -8,13 +8,13 @@
         <main class="px-3">
 
 
-            <img src="/images/UPTMLOGO.png" alt="UPTMLOGO" height="100" width="200">
-            <h1>Venue Booking System</h1>
-            <p sec:authorize="isAnonymous()" class="lead">Selamat Datang. Sila <a th:href="@{/login}">Log Masuk</a> mengunakan akaun pelajar anda.</p>
+            <img src="/images/UPTMLOGO.png" alt="UPTMLOGO" height="150" width="300">
+            <h1>Online Venue Appointment System</h1>
+            <p sec:authorize="isAnonymous()" class="lead">Welcome. Please <a th:href="@{/login}">Log Masuk</a> mengunakan akaun pelajar anda.</p>
 
             <p sec:authorize="!hasRole('ADMIN') and isAuthenticated()">Welcome,
                 [[${#request.userPrincipal.principal.fullName}]].</p>
-            <p sec:authorize="hasRole('ADMIN')">Selamat, Admin.</p>
+            <p sec:authorize="hasRole('ADMIN')">Welcome, Admin.</p>
         </main>
 
         <footer th:replace="public-footer :: public-footer"></footer>

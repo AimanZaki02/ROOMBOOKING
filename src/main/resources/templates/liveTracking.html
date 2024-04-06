@@ -45,6 +45,35 @@
     </div>
 </section>
 
+<div class="section__container table-container">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr class="table-secondary">
+                <th scope="col">ID</th>
+                <th scope="col">Code</th>
+                <th scope="col">Location</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room : ${rooms}">
+                <td th:text="${room.id}"></td>
+                <td th:text="${room.code}"></td>
+                <td th:text="${room.location}"></td>
+                <td th:text="${room.capacity}"></td>
+                <td>
+                    <a th:href="@{/room/edit/{id}(id=${room.id})}" class="btn btn-primary">Edit</a>
+                    <a th:href="@{/room/delete/{id}(id=${room.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 <footer class="footer" id="contact">
     <!-- Footer content -->
 </footer>

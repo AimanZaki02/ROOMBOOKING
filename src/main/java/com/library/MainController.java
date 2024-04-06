@@ -38,6 +38,16 @@ public class MainController {
         return "secondindex";
     }
 
+    @GetMapping("/neosecondindex")
+    public String neosecondIndex(Model model, @ModelAttribute("message") String message,
+                              @ModelAttribute("swal") String swal,
+                              @ModelAttribute("errorMessage") String errorMessage) {
+        model.addAttribute("message", message);
+        model.addAttribute("swal", swal);
+        model.addAttribute("errorMessage", errorMessage);
+        return "neosecondindex";
+    }
+
     @GetMapping("/makebooking")
     public String makebooking(Model model, @ModelAttribute("message") String message,
                               @ModelAttribute("swal") String swal,

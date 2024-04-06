@@ -1,46 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="public-head" :: public-head>
     <!-- Head elements including stylesheets and meta tags -->
-    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/css/stubooking.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!DOCTYPE html>
+    <html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="public-head" :: public-head>
+        <!-- Head elements including stylesheets and meta tags -->
+        <link rel="stylesheet" type="text/css" href="/css/stubooking.css">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
+    </head>
+    <body class="d-flex h-100 text-center text-white bg-dark">
+
+    <div class="w-100 h-100 img-wrap">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+            <!-- Header Section -->
+            <header th:replace="public-nav :: public-nav"></header>
 </head>
-
-<body class="text-center text-white bg-dark">
-<!-- Header Section -->
-<header class="header">
-    <nav>
-        <div class="nav__bar">
-            <div class="logo">
-                <a href="#"><img src="/images/UPTMLOGO.png" alt="logo" /></a>
-            </div>
-            <div class="nav__menu__btn" id="me  nu-btn">
-                <i class="ri-menu-line"></i>
-            </div>
-        </div>
-        <ul class="nav__links" id="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#room">Venue</a></li>
-            <li><a href="#explore">Explore</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button sec:authorize="isAnonymous()" class="btn"><a th:href="@{/login}">Login</a></button>
-    </nav>
-</header>
-
-<div class="img-wrap">
-    <div class="cover-container d-flex p-3 mx-auto flex-column">
+<body class="d-flex h-100 text-center text-white bg-dark">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <!-- Main Content -->
-        <main class="px-3">
+        <main class="">
             <!-- Booking Form Section -->
             <section class="section__container form-container">
                 <h2 class="section__header">Book a Room</h2>
                 <form th:action="@{/saveBooking}" method="post" class="booking-form">
                 <div class="form-row">
-                        <label for="roomCode" class="section__description">Room Code:</label>
-                        <input type="text" id="roomCode" name="roomCode" required class="input">
+                        <label for="roomPurpose" class="section__description">Purpose:</label>
+                        <input type="text" id="roomPurpose" name="roomPurpose" required class="input">
                     </div>
                     <div class="form-row">
                         <label for="roomName" class="section__description">Room Name:</label>
@@ -59,8 +48,12 @@
                         <input type="date" id="bookingDate" name="bookingDate" required class="input">
                     </div>
                     <div class="form-row">
-                        <label for="bookingTime" class="section__description">Time:</label>
+                        <label for="bookingTime" class="section__description">Time Start:</label>
                         <input type="time" id="bookingTime" name="bookingTime" required class="input">
+                    </div>
+                    <div class="form-row">
+                        <label for="bookingEnd" class="section__description">Time End:</label>
+                        <input type="time" id="bookingEnd" name="bookingEnd" required class="input">
                     </div>
                     <div class="form-row">
                         <button type="submit" class="btn">Book Now</button>
@@ -92,4 +85,5 @@
     /*]]>*/
 </script>
 </body>
+<footer></footer>
 </html>

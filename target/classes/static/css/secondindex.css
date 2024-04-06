@@ -1,3 +1,4 @@
+@ -0,0 +1,605 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 :root {
@@ -20,173 +21,6 @@
   margin: auto;
   padding: 5rem 1rem;
 }
- .center-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh; /* Or adjust to your needs */
- }
-
-.table {
-    width: 100%;
-    margin-top: 2rem;
-    border-collapse: collapse;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.table thead th {
-    background-color: var(--primary-color);
-    color: var(--white);
-    font-weight: 500;
-    padding: 10px;
-    text-align: left;
-}
-
-.table tbody td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    color: var(--text-dark);
-}
-
-.table tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-.table tbody tr:hover {
-    background-color: var(--primary-color-dark);
-    color: var(--white);
-    cursor: pointer;
-}
-
-/* Additional styling for responsiveness and aesthetics */
-.table-responsive {
-    overflow-x: auto;
-}
-
-.section__container .table-container {
-    background-color: var(--white);
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-}
-/* Booking Form */
-.booking-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background-color: var(--white);
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-}
-
-.input__group input, .input__group select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.input__group select {
-    height: 2.5rem;
-}
-
-.input__group input[type=date],
-.input__group input[type=time] {
-    font-size: 0.9rem;
-}
-
-.input__group label {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--text-dark);
-}
-
-.input__group input:focus, .input__group select:focus {
-    border-color: var(--primary-color);
-    outline: none;
-}
-
-.booking-form .btn {
-    align-self: center;
-    margin-top: 1rem;
-    width: 100%;
-    max-width: 200px; /* Adjust width as per your layout */
-}
-/* Booking Form */
-
-/* edit Form */
-.edit-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4rem 1rem;
-}
-
-.edit-container {
-    width: 100%;
-    max-width: 800px;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-}
-
-.edit-header {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.form-actions {
-    text-align: center;
-}
-
-.submit-btn {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--white);
-    background-color: var(--primary-color);
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s;
-}
-
-.submit-btn:hover {
-    background-color: var(--primary-color-dark);
-}
-/* edit Form */
-
-.form-container {
-      width: 100%; /* Or max-width for larger viewports */
-      max-width: 500px; /* Adjust based on your design */
-      padding: 2rem;
-      background: #fff; /* Or any other background */
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-      border-radius: 8px;
-  }
 
 .section__subheader {
   margin-bottom: 0.5rem;
@@ -221,73 +55,6 @@
   color: var(--text-light);
 }
 
-/* Search Function */
-.search__container {
-    padding: 2rem 1rem;
-    text-align: center;
-}
-
-.search-form {
-    margin: auto;
-    max-width: 500px;
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-}
-
-.search-input {
-    flex-grow: 1;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-btn {
-    padding: 0.5rem 1rem;
-    color: var(--white);
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-btn:hover {
-    background-color: var(--primary-color-dark);
-}
-
-/* live tracking */
-.room__card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin: 10px;
-    text-align: center;
-}
-
-.room__card__details h4 {
-    margin-bottom: 10px;
-    color: var(--primary-color);
-    font-weight: 600;
-}
-
-.room__card__details p {
-    margin-bottom: 5px;
-    color: var(--text-dark);
-}
-
-.status-booked {
-    color: red;
-    font-weight: bold;
-}
-
-.status-available {
-    color: green;
-    font-weight: bold;
-}
-
-
-
 .btn {
   padding: 0.75rem 1.5rem;
   outline: none;
@@ -295,7 +62,7 @@
   font-size: 1rem;
   font-weight: 500;
   color: var(--white);
-  background-image: radial-gradient(circle, #00c8ff, #00d7ff, #00e5fd, #00f3f5, #00ffe8);
+  background-color: var(--primary-color);
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
@@ -328,7 +95,7 @@ body {
 }
 
 .header {
-  background-image: url("/images/UPTMBG.jpeg");
+  background-image: url("/images/header.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -419,8 +186,6 @@ nav {
 }
 
 .booking__form {
-  background-image: radial-gradient(circle, #005be3, #3273e9, #538aec, #73a1ee, #93b7ee);
-  color: white;
   padding: 2rem;
   display: flex;
   gap: 1rem;
@@ -832,14 +597,10 @@ nav {
   .footer__container {
     grid-template-columns: repeat(4, 1fr);
   }
-
-
 }
-
 
 @media (width > 1024px) {
   .room__grid {
     gap: 2rem;
   }
 }
-
