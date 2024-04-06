@@ -70,6 +70,49 @@
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.input__group input, .input__group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__group select {
+    height: 2.5rem;
+}
+
+.input__group input[type=date],
+.input__group input[type=time] {
+    font-size: 0.9rem;
+}
+
+.input__group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.input__group input:focus, .input__group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.booking-form .btn {
+    align-self: center;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 200px; /* Adjust width as per your layout */
+}
 
 .form-container {
       width: 100%; /* Or max-width for larger viewports */
@@ -79,6 +122,7 @@
       box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
       border-radius: 8px;
   }
+
 .section__subheader {
   margin-bottom: 0.5rem;
   position: relative;

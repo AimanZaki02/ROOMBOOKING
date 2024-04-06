@@ -109,6 +109,31 @@
 </div>
 
 
+<section class="section__container form-container">
+    <h2 class="section__header">Book a Room</h2>
+    <form action="/bookRoom" method="post" class="booking-form">
+        <div class="input__group">
+            <label for="roomCode" class="section__description">Room Code:</label>
+            <select id="roomCode" name="roomCode" required class="input__group input">
+                <option value="" disabled selected>Select a room</option>
+                <th:block th:each="room : ${rooms}">
+                    <option th:value="${room.code}" th:text="${room.code}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="input__group">
+            <label for="bookingDate" class="section__description">Date:</label>
+            <input type="date" id="bookingDate" name="bookingDate" required class="input__group input">
+        </div>
+        <div class="input__group">
+            <label for="bookingTime" class="section__description">Time:</label>
+            <input type="time" id="bookingTime" name="bookingTime" required class="input__group input">
+        </div>
+        <div class="input__group">
+            <button type="submit" class="btn">Book Now</button>
+        </div>
+    </form>
+</section>
 
 <section class="section__container room__container" id="room">
     <p class="section__subheader">UPTM Venues</p>
