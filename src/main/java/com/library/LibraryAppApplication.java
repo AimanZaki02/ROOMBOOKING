@@ -23,11 +23,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 // Annotate as SpringBootApplication
 @SpringBootApplication
-public class VenueBookingApplication {
+public class LibraryAppApplication {
 
 	// Run the Spring application!
 	public static void main(String[] args) {
-		SpringApplication.run(VenueBookingApplication.class, args);
+		SpringApplication.run(LibraryAppApplication.class, args);
 	}
 
 }
