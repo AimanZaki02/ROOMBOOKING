@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.List;
 
@@ -89,21 +91,18 @@ public class RoomController {
 
     // Map HTTP GET requests for '/student/search/page/{pageNum}'
     @GetMapping("/room/search/page/{pageNum}")
-    public String searchByPage(@PathVariable(name = "pageNum") int pageNum, String keyword, Model model) {
-        Page<Room> result = roomService.search(keyword, pageNum);
-        List<Room> listResult = result.getContent();
-        model.addAttribute("totalPages", result.getTotalPages());
-        model.addAttribute("totalItems", result.getTotalElements());
-        model.addAttribute("currentPage", pageNum);
-        long startCount = (pageNum - 1) * roomService.SEARCH_RESULT_PER_PAGE + 1;
-        model.addAttribute("startCount", startCount);
-        long endCount = startCount + RoomService.SEARCH_RESULT_PER_PAGE - 1;
-        if (endCount > result.getTotalElements()) {
-            endCount = result.getTotalElements();
+    public String searchByPage(@PathVariable(name = "pageNum") int pageNum, @RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            Page<Room> result = roomService.search(keyword, pageNum);
+            model.addAttribute("rooms", result.getContent());
+            model.addAttribute("totalPages", result.getTotalPages());
+            model.addAttribute("currentPage", pageNum);
+            model.addAttribute("totalItems", result.getTotalElements());
+            model.addAttribute("keyword", keyword);
         }
-        model.addAttribute("endCount", endCount);
-        model.addAttribute("listResult", listResult);
-        model.addAttribute("keyword", keyword);
-        return "search";
+        return "secondindex"; // Use secondindex to render the same page with search results
     }
+
+
+
 }
