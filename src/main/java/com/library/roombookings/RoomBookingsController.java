@@ -11,32 +11,32 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class RoomBookingsController {
-    private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RoomBookingsController.class);
 
     @Autowired
-    private BookingService bookingService;
+    private RoomBookingsService bookingService;
 
     // Additional methods and annotations remain the same but renamed to reflect the booking context
 
-    @GetMapping("/booking")
+    @GetMapping("/roombookings")
     public String listBookings(Model model) {
-        model.addAttribute("bookings", bookingService.listAll());
-        return "booking"; // Updated template name
+        model.addAttribute("bookings", roombookingsService.listAll());
+        return "roombookings"; // Updated template name
     }
 
-    @PostMapping("/saveBooking")
-    public String saveBooking(@ModelAttribute RoomBooking booking, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    @PostMapping("/saveRoomBookings")
+    public String saveBooking(@ModelAttribute RoomBookings booking, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         // Method body updated with references to RoomBooking and "booking" instead of "room"
         // ...
     }
 
-    @GetMapping("/booking/edit/{id}")
+    @GetMapping("/roombookings/edit/{id}")
     public String editBooking(@PathVariable Integer id, Model model) {
         try {
-            RoomBooking booking = bookingService.get(id);
-            model.addAttribute("booking", booking);
-            return "editBooking"; // Updated template name
-        } catch (BookingNotFoundException e) {
+            RoomBookings roombookings = roombookingsService.get(id);
+            model.addAttribute("roombookings", roombookings);
+            return "editRoomBookings"; // Updated template name
+        } catch (RoomBookingsNotFoundException e) {
             // Exception handling remains the same
             // ...
         }
