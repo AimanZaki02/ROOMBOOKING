@@ -172,6 +172,50 @@
     </form>
 </section>
 
+<section class="section__container search__container">
+    <h2 class="section__header">Search Rooms</h2>
+    <form th:action="@{/room/search/page/1}" method="get" class="search-form">
+        <div class="input__group">
+            <input type="text" name="keyword" placeholder="Search by code, location, etc." class="search-input">
+            <button type="submit" class="btn search-btn">Search</button>
+        </div>
+    </form>
+</section>
+
+<section class="section__container" th:if="${rooms != null}">
+    <h2 class="section__header">Search Results</h2>
+    <div class="table-responsive" th:if="${not #lists.isEmpty(rooms)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Code</th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room : ${rooms}">
+                <td th:text="${room.id}"></td>
+                <td th:text="${room.code}"></td>
+                <td th:text="${room.location}"></td>
+                <td th:text="${room.capacity}"></td>
+                <td>
+                    <a th:href="@{/room/edit/{id}(id=${room.id})}" class="btn btn-primary">Edit</a>
+                    <a th:href="@{/room/delete/{id}(id=${room.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:unless="${not #lists.isEmpty(rooms)}">
+        <p>No results found.</p>
+    </div>
+</section>
+
+
+
 <section class="section__container room__container" id="room">
     <p class="section__subheader">UPTM Venues</p>
     <h2 class="section__header">Exciting and Educational Event Starts Here.</h2>

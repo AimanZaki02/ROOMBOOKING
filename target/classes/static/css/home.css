@@ -221,6 +221,41 @@
   color: var(--text-light);
 }
 
+/* Search Function */
+.search__container {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.search-form {
+    margin: auto;
+    max-width: 500px;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-btn {
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background-color: var(--primary-color-dark);
+}
+
+
 .btn {
   padding: 0.75rem 1.5rem;
   outline: none;
