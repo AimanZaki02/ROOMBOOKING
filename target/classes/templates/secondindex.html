@@ -85,9 +85,9 @@
     </form>
 </section>
 
-<div class="row">
-    <div th:unless="${totalItems == 0}">
-        <table class="table table-dark mt-3">
+<div class="section__container table-container">
+    <div class="table-responsive">
+        <table class="table">
             <thead>
             <tr class="table-secondary">
                 <th scope="col">ID</th>
@@ -97,16 +97,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="room : ${listResult}" class="table table-light">
-                <td>[[${room.id}]]</td>
-                <td>[[${room.code}]]</td>
-                <td>[[${room.location}]]</td>
-                <td>[[${room.capacity}]]</td>
+            <tr th:each="room : ${rooms}">
+                <td th:text="${room.id}"></td>
+                <td th:text="${room.code}"></td>
+                <td th:text="${room.location}"></td>
+                <td th:text="${room.capacity}"></td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+
 
 <section class="section__container room__container" id="room">
     <p class="section__subheader">UPTM Venues</p>

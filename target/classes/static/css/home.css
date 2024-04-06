@@ -27,6 +27,50 @@
       min-height: 100vh; /* Or adjust to your needs */
  }
 
+.table {
+    width: 100%;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table thead th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 500;
+    padding: 10px;
+    text-align: left;
+}
+
+.table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    color: var(--text-dark);
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+    background-color: var(--primary-color-dark);
+    color: var(--white);
+    cursor: pointer;
+}
+
+/* Additional styling for responsiveness and aesthetics */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.section__container .table-container {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+
 .form-container {
       width: 100%; /* Or max-width for larger viewports */
       max-width: 500px; /* Adjust based on your design */
