@@ -17,5 +17,6 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     @Query("SELECT r FROM Room r WHERE r.code LIKE %:keyword% OR r.location LIKE %:keyword%")
     Page<Room> search(@Param("keyword") String keyword, Pageable pageable);
 
+
     public Long countById(Integer id);
 }
