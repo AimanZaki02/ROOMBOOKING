@@ -63,6 +63,39 @@
     </div>
 </div>
 
+<section class="section__container form-container">
+    <h2 class="section__header">Book a Room</h2>
+    <form action="/bookRoom" method="post" class="booking-form">
+        <div class="input__group">
+            <label for="roomCode" class="section__description">Room Code:</label>
+            <input type="text" id="roomCode" name="room_code" required class="input__group input">
+        </div>
+        <div class="input__group">
+            <label for="roomName" class="section__description">Room Name:</label>
+            <input type="text" id="roomName" name="room_name" required class="input__group input">
+        </div>
+        <div class="input__group">
+            <label for="customerName" class="section__description">Your Name:</label>
+            <input type="text" id="customerName" name="customer_name" required class="input__group input">
+        </div>
+        <div class="input__group">
+            <label for="phoneNumber" class="section__description">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phone_number" required class="input__group input">
+        </div>
+        <div class="input__group">
+            <label for="bookingDate" class="section__description">Date:</label>
+            <input type="date" id="bookingDate" name="booking_date" required class="input__group input">
+        </div>
+        <div class="input__group">
+            <label for="bookingTime" class="section__description">Time:</label>
+            <input type="time" id="bookingTime" name="booking_time" required class="input__group input">
+        </div>
+        <div class="input__group">
+            <button type="submit" class="btn">Book Now</button>
+        </div>
+    </form>
+</section>
+
 
 <footer class="footer" id="contact">
     <div class="section__container footer__container">
