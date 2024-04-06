@@ -90,18 +90,22 @@ public class RoomBookingsController {
         }
     }
 
-    @GetMapping("/liveTracking")
-    public String liveBookings(Model model) {
-        try {
-            List<RoomBookings> liveBookings = roombookingsService.getLiveBookings();
-            model.addAttribute("liveBookings", liveBookings);
-            return "liveTracking"; // Name of the template that displays live bookings
-        } catch (Exception e) {
-            logger.error("Error retrieving live bookings: ", e);
-            model.addAttribute("errorMessage", "Error retrieving live bookings");
-            return "error"; // Error view
-        }
-    }
+//    @GetMapping("/liveTracking")
+//    public String liveTracking(Model model) {
+//        logger.debug("Entering liveTracking method");
+//        try {
+//            List<RoomBookings> liveBookings = roombookingsService.getLiveBookings();
+//            logger.debug("liveBookings fetched, count: {}", liveBookings.size());
+//            model.addAttribute("liveBookings", liveBookings);
+//            return "liveTracking";
+//        } catch (Exception e) {
+//            logger.error("Error in liveTracking", e);
+//            model.addAttribute("errorMessage", "Error retrieving live bookings: " + e.getMessage());
+//            return "error";
+//        }
+//    }
+
+
 
 
 
@@ -144,17 +148,17 @@ public class RoomBookingsController {
         }
     }
 
-    @GetMapping("/roombookings/search/page/{pageNum}")
-    public String searchBookingsByPage(@PathVariable(name = "pageNum") int pageNum,
-                                       @RequestParam(value = "keyword", required = false) String keyword, Model model) {
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            Page<RoomBookings> result = roombookingsService.search(keyword, pageNum);
-            model.addAttribute("bookings", result.getContent());
-            model.addAttribute("totalPages", result.getTotalPages());
-            model.addAttribute("currentPage", pageNum);
-            model.addAttribute("totalItems", result.getTotalElements());
-            model.addAttribute("keyword", keyword);
-        }
-        return "makebooking"; // Ensure this is the correct Thymeleaf template for search results
-    }
+//    @GetMapping("/roombookings/search/page/{pageNum}")
+//    public String searchBookingsByPage(@PathVariable(name = "pageNum") int pageNum,
+//                                       @RequestParam(value = "keyword", required = false) String keyword, Model model) {
+//        if (keyword != null && !keyword.trim().isEmpty()) {
+//            Page<RoomBookings> result = roombookingsService.search(keyword, pageNum);
+//            model.addAttribute("bookings", result.getContent());
+//            model.addAttribute("totalPages", result.getTotalPages());
+//            model.addAttribute("currentPage", pageNum);
+//            model.addAttribute("totalItems", result.getTotalElements());
+//            model.addAttribute("keyword", keyword);
+//        }
+//        return "makebooking"; // Ensure this is the correct Thymeleaf template for search results
+//    }
 }

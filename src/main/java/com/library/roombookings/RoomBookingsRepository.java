@@ -10,6 +10,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import java.time.LocalDate;
+import org.springframework.data.repository.query.Param;
+
 
 @Repository
 public interface RoomBookingsRepository extends JpaRepository<RoomBookings, Integer> {
@@ -21,7 +23,7 @@ public interface RoomBookingsRepository extends JpaRepository<RoomBookings, Inte
 
     // Method to find live bookings for a given date
     @Query("SELECT rb FROM RoomBookings rb WHERE rb.bookingDate = :date")
-    List<RoomBookings> findLiveBookings(LocalDate date);
+    List<RoomBookings> findLiveBookings(@Param("date") LocalDate date);
 
     // Method to count bookings by ID - you already have this
     Long countById(Integer id);

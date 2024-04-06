@@ -1,6 +1,8 @@
 
 package com.library.roombookings;
-
+import com.library.MainController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RoomBookingsService {
+    private static final Logger logger = LoggerFactory.getLogger(RoomBookingsService.class);
 
     private static final int SEARCH_RESULT_PER_PAGE = 10; // Define the constant
 
@@ -45,6 +48,15 @@ public class RoomBookingsService {
 
     public List<RoomBookings> getLiveBookings() {
         LocalDate today = LocalDate.now();
-        return repo.findLiveBookings(today);
+        logger.debug("Fetching live bookings for date: {}", today);
+        try {
+            List<RoomBookings> liveBookings = repo.findLiveBookings(today);
+            logger.debug("Found {} live bookings", liveBookings.size());
+            return liveBookings;
+        } catch (Exception e) {
+            logger.error("Error fetching live bookings", e);
+            throw e; // Rethrow the exception or handle it appropriately
+        }
     }
+
 }

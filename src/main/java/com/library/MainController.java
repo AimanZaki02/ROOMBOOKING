@@ -1,27 +1,29 @@
 package com.library;
 
-import com.library.room.RoomService; // Import RoomService
-import com.library.roombookings.RoomBookings;
+import com.library.room.RoomService;
 import com.library.roombookings.RoomBookingsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.List;
-
 @Controller
 public class MainController {
 
+    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+
     @Autowired
-    private RoomService roomService; // Autowire the RoomService
+    private RoomService roomService;
 
     @Autowired
     private RoomBookingsService roombookingsService;
 
     @GetMapping("/")
     public String showHomePage() {
+        logger.debug("Showing home page");
         return "index";
     }
 
@@ -29,11 +31,10 @@ public class MainController {
     public String secondIndex(Model model, @ModelAttribute("message") String message,
                               @ModelAttribute("swal") String swal,
                               @ModelAttribute("errorMessage") String errorMessage) {
-        // Add room data to the model along with other attributes
         model.addAttribute("message", message);
         model.addAttribute("swal", swal);
         model.addAttribute("errorMessage", errorMessage);
-        model.addAttribute("rooms", roomService.listAll()); // Add this line to pass rooms data
+        model.addAttribute("rooms", roomService.listAll());
         return "secondindex";
     }
 
@@ -41,20 +42,16 @@ public class MainController {
     public String makebooking(Model model, @ModelAttribute("message") String message,
                               @ModelAttribute("swal") String swal,
                               @ModelAttribute("errorMessage") String errorMessage) {
-        // Add room data to the model along with other attributes
         model.addAttribute("message", message);
         model.addAttribute("swal", swal);
         model.addAttribute("errorMessage", errorMessage);
-        model.addAttribute("rooms", roombookingsService.listAll()); // Add this line to pass rooms data
-
+        model.addAttribute("rooms", roombookingsService.listAll());
         return "makebooking";
     }
 
     @GetMapping("/liveTracking")
     public String liveTracking(Model model) {
-        List<RoomBookings> liveBookings = roombookingsService.getLiveBookings();
-        model.addAttribute("liveBookings", liveBookings);
-        return "liveTracking"; // The Thymeleaf template that displays the live bookings.
+        logger.debug("Entering liveTracking method");
+        return "liveTracking";
     }
-
 }
