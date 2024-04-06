@@ -255,6 +255,38 @@
     background-color: var(--primary-color-dark);
 }
 
+/* live tracking */
+.room__card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+}
+
+.room__card__details h4 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.room__card__details p {
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+.status-booked {
+    color: red;
+    font-weight: bold;
+}
+
+.status-available {
+    color: green;
+    font-weight: bold;
+}
+
+
 
 .btn {
   padding: 0.75rem 1.5rem;

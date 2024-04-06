@@ -15,6 +15,9 @@ public class RoomBookings {
     @Column(name = "room_code", nullable = false, length = 50)
     private String roomCode;
 
+    @Column(name = "room_name", nullable = false, length = 100)
+    private String roomName;
+
     @Column(name = "customer_name", nullable = false, length = 100)
     private String customerName;
 
@@ -43,6 +46,14 @@ public class RoomBookings {
 
     public void setRoomCode(String roomCode) {
         this.roomCode = roomCode;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public String getCustomerName() {
@@ -101,6 +112,7 @@ public class RoomBookings {
         return "RoomBookings{" +
                 "id=" + id +
                 ", roomCode='" + roomCode + '\'' +
+                ", roomName='" + roomName + '\'' + // Add roomName to toString method
                 ", customerName='" + customerName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", bookingDate=" + bookingDate +

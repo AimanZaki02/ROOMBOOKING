@@ -6,15 +6,25 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import java.time.LocalDate;
 
 @Repository
 public interface RoomBookingsRepository extends JpaRepository<RoomBookings, Integer> {
-    // Updated query to match the searchable fields from room_bookings table
-    // Assuming 'code' and 'name' can be searched for a room booking; you can modify it as needed
+
+    // Existing method for searching
     @Query(value = "SELECT * FROM room_bookings WHERE MATCH(room_code, room_name, customer_name) " +
             "AGAINST (?1 IN BOOLEAN MODE)", nativeQuery = true)
-    public Page<RoomBookings> search(String keyword, Pageable pageable);
+    Page<RoomBookings> search(String keyword, Pageable pageable);
 
-    // Additional repository methods for counting bookings by ID or any other operation required
-    public Long countById(Integer id);
+    // Method to find live bookings for a given date
+    @Query("SELECT rb FROM RoomBookings rb WHERE rb.bookingDate = :date")
+    List<RoomBookings> findLiveBookings(LocalDate date);
+
+    // Method to count bookings by ID - you already have this
+    Long countById(Integer id);
+
+    // Additional repository methods as needed
 }

@@ -1,12 +1,15 @@
 package com.library;
 
 import com.library.room.RoomService; // Import RoomService
+import com.library.roombookings.RoomBookings;
 import com.library.roombookings.RoomBookingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -46,4 +49,12 @@ public class MainController {
 
         return "makebooking";
     }
+
+    @GetMapping("/liveTracking")
+    public String liveTracking(Model model) {
+        List<RoomBookings> liveBookings = roombookingsService.getLiveBookings();
+        model.addAttribute("liveBookings", liveBookings);
+        return "liveTracking"; // The Thymeleaf template that displays the live bookings.
+    }
+
 }

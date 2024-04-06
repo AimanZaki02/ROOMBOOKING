@@ -9,6 +9,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.support.WebBindingInitializer;
+import org.springframework.web.context.request.WebRequest;
+
+import java.beans.PropertyEditorSupport;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Controller
 public class RoomBookingsController {
@@ -17,31 +30,80 @@ public class RoomBookingsController {
     @Autowired
     private RoomBookingsService roombookingsService;
 
+    @InitBinder
+    public void initBinder(final WebDataBinder binder) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Time.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(final String text) throws IllegalArgumentException {
+                try {
+                    setValue(new Time(timeFormat.parse(text).getTime()));
+                } catch (final ParseException e) {
+                    throw new IllegalArgumentException("Could not parse time: " + text, e);
+                }
+            }
+
+            @Override
+            public String getAsText() {
+                Time value = (Time) getValue();
+                return (value != null ? timeFormat.format(value) : "");
+            }
+        });
+    }
+
     @GetMapping("/roombookings")
     public String listBookings(Model model) {
-        model.addAttribute("bookings", roombookingsService.listAll());
-        return "roombookings"; // Ensure this is the correct Thymeleaf template
+        try {
+            model.addAttribute("bookings", roombookingsService.listAll());
+            return "roombookings";
+        } catch (Exception e) {
+            logger.error("Error listing bookings: ", e);
+            model.addAttribute("errorMessage", "Error retrieving bookings");
+            return "error"; // Assume there is an 'error.html' Thymeleaf template
+        }
     }
 
     @PostMapping("/saveBooking")
-    public String saveBooking(@ModelAttribute RoomBookings booking, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String saveBooking(@ModelAttribute("booking") RoomBookings booking, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        logger.info("Attempting to save booking: {}", booking); // Log the state of the booking object
         if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(error -> logger.error("Validation error: " + error.toString()));
+            logger.error("Validation errors: {}", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.booking", bindingResult);
             redirectAttributes.addFlashAttribute("booking", booking);
-            return "redirect:/makebooking"; // Modify as necessary
+            return "redirect:/makebooking"; // Redirect to the form page to display errors
         }
+
         try {
             roombookingsService.save(booking);
+            logger.info("Booking saved successfully: {}", booking); // Log the successful save
             redirectAttributes.addFlashAttribute("swal", "success");
             redirectAttributes.addFlashAttribute("message", "Booking saved successfully!");
-            return "redirect:/makebooking"; // Modify as necessary
+            return "redirect:/makebooking";
         } catch (Exception e) {
-            logger.error("Exception occurred during booking save", e);
-            redirectAttributes.addFlashAttribute("errorMessage", "Error saving booking: " + e.getMessage());
-            return "redirect:/makebooking"; // Modify as necessary
+            logger.error("Exception occurred during booking save: ", e);
+            redirectAttributes.addFlashAttribute("swal", "error");
+            redirectAttributes.addFlashAttribute("message", "Error saving booking: " + e.getMessage());
+            return "redirect:/makebooking";
         }
     }
+
+    @GetMapping("/liveTracking")
+    public String liveBookings(Model model) {
+        try {
+            List<RoomBookings> liveBookings = roombookingsService.getLiveBookings();
+            model.addAttribute("liveBookings", liveBookings);
+            return "liveTracking"; // Name of the template that displays live bookings
+        } catch (Exception e) {
+            logger.error("Error retrieving live bookings: ", e);
+            model.addAttribute("errorMessage", "Error retrieving live bookings");
+            return "error"; // Error view
+        }
+    }
+
+
 
     @GetMapping("/roombookings/edit/{id}")
     public String editBooking(@PathVariable Integer id, Model model) {

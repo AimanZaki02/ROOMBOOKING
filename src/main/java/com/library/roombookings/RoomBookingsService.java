@@ -7,6 +7,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;  // Import the List class
+import java.time.LocalDate;
+import org.springframework.stereotype.Service;
+
 @Service
 public class RoomBookingsService {
 
@@ -38,5 +41,10 @@ public class RoomBookingsService {
             throw new RoomBookingsNotFoundException("Room booking not found with ID: " + id);
         }
         repo.deleteById(id);
+    }
+
+    public List<RoomBookings> getLiveBookings() {
+        LocalDate today = LocalDate.now();
+        return repo.findLiveBookings(today);
     }
 }

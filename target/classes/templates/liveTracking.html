@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Room Tracking - UPTMVBS</title>
+    <link rel="stylesheet" href="/css/home.css">
+
+</head>
+<body>
+<header class="header">
+    <nav>
+        <div class="nav__bar">
+            <div class="logo">
+                <a href="#"><img src="/images/UPTMLOGO.png" alt="logo" /></a>
+            </div>
+            <div class="nav__menu__btn" id="me  nu-btn">
+                <i class="ri-menu-line"></i>
+            </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#room">Venue</a></li>
+            <li><a href="#explore">Explore</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button sec:authorize="isAnonymous()" class="btn"><a th:href="@{/login}">Login</a></button>
+    </nav>
+</header>
+
+<section class="section__container">
+    <h2 class="section__header">Live Room Booking Tracking</h2>
+    <div class="room__grid">
+        <!-- Dynamically populate this section with live tracking data -->
+        <div th:each="booking : ${liveBookings}" class="room__card">
+            <div class="room__card__details">
+                <h4 th:text="${booking.roomCode}"></h4>
+                <p th:text="'Booked by: ' + ${booking.customerName}"></p>
+                <p th:text="'Date: ' + ${#dates.format(booking.bookingDate, 'dd/MM/yyyy')}"></p>
+                <p th:text="'Time: ' + ${#dates.format(booking.bookingTime, 'HH:mm')}"></p>
+                <span th:class="${booking.status == 'Booked' ? 'status-booked' : 'status-available'}" th:text="${booking.status}"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer" id="contact">
+    <!-- Footer content -->
+</footer>
+
+<script src="/js/secondindex.js"></script>
+
+
+</body>
+</html>
