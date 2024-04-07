@@ -97,6 +97,7 @@ public class RoomBookingsController {
         logger.debug("Entering liveTracking method");
         try {
             Map<String, List<RoomBookings>> groupedBookings = roombookingsService.getLiveBookingsGroupedByRoom();
+            logger.debug("Grouped bookings: {}", groupedBookings);
             model.addAttribute("liveBookings", groupedBookings);
             return "liveTracking";
         } catch (Exception e) {
@@ -105,6 +106,8 @@ public class RoomBookingsController {
             return "error";
         }
     }
+
+
 
 
 

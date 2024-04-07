@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+
 import com.library.roombookings.RoomBookings;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -68,11 +70,10 @@ public class MainController {
     public String liveTracking(Model model) {
         logger.debug("Entering liveTracking method");
         try {
-            LocalDate today = LocalDate.now();
-            List<RoomBookings> liveBookings = roomBookingsService.getLiveBookings();
-            logger.debug("liveBookings fetched, count: {}", liveBookings.size());
+            Map<String, List<RoomBookings>> groupedBookings = roomBookingsService.getLiveBookingsGroupedByRoom();
+            logger.debug("Grouped bookings fetched, count: {}", groupedBookings.size());
 
-            model.addAttribute("liveBookings", liveBookings);
+            model.addAttribute("liveBookings", groupedBookings);
             return "liveTracking";
         } catch (Exception e) {
             logger.error("Error in liveTracking", e);
@@ -80,4 +81,5 @@ public class MainController {
             return "error";
         }
     }
+
 }

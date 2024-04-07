@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,9 +64,23 @@ public class RoomBookingsService {
     }
 
     public Map<String, List<RoomBookings>> getLiveBookingsGroupedByRoom() {
-        List<RoomBookings> bookings = getLiveBookings(); // Use your existing method to fetch bookings
-        return bookings.stream().collect(Collectors.groupingBy(RoomBookings::getRoomName));
+        try {
+            logger.debug("Fetching grouped live bookings");
+            List<RoomBookings> bookings = getLiveBookings(); // Fetch the live bookings
+            logger.debug("Live bookings retrieved: {}", bookings);
+
+            Map<String, List<RoomBookings>> groupedBookings = bookings.stream()
+                    .collect(Collectors.groupingBy(RoomBookings::getRoomName));
+
+            logger.debug("Grouped bookings: {}", groupedBookings);
+            return groupedBookings;
+        } catch (Exception e) {
+            logger.error("Error in getLiveBookingsGroupedByRoom", e);
+            return new HashMap<>(); // Return an empty map or handle as appropriate
+        }
     }
+
+
 
 
 }
