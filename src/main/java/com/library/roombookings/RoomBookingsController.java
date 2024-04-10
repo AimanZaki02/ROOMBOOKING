@@ -56,6 +56,8 @@ public class RoomBookingsController {
         });
     }
 
+
+
     @GetMapping("/roombookings")
     public String listBookings(Model model) {
         try {
@@ -106,14 +108,6 @@ public class RoomBookingsController {
             return "error";
         }
     }
-
-
-
-
-
-
-
-
 
     @GetMapping("/roombookings/edit/{id}")
     public String editBooking(@PathVariable Integer id, Model model) {
