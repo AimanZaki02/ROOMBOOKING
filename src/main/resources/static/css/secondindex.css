@@ -187,21 +187,37 @@ nav {
 }
 
 .booking__container {
-  padding-block: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This centers the children */
+    padding: 1em;
+    background-color: #fff; /* Adjust the color to match your theme */
+    margin: 1em auto; /* Centers the section container */
 }
 
-.booking__form {
-  padding: 2rem;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  background-color: var(--white);
-  border-radius: 10px;
-  transform: translateY(-50%);
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+.booking__prompt-container {
+    margin-bottom: 1em; /* Adds space between the text and the button */
 }
+
+.booking__prompt {
+    font-size: 1.25rem;
+    color: #333;
+    text-align: center; /* Center-align the prompt */
+}
+
+.btn-book {
+    padding: 0.5em 1em;
+    background-color: #0044cc; /* Example primary color */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-book:hover {
+    background-color: #003399; /* Darker shade on hover for the button */
+}
+
 
 .input__group {
   flex: 1 1 220px;
@@ -246,6 +262,18 @@ nav {
   max-width: 450px;
   margin: auto;
   border-radius: 5px;
+}
+
+.section__container.room__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.section__container.room__container h2 {
+    font-size: 35px;
 }
 
 .room__grid {
@@ -419,23 +447,17 @@ nav {
 }
 
 .explore :is(.section__subheader, .section__header) {
+    color: white;
   text-align: center;
   margin-inline: auto;
 }
 
 .explore__bg {
-  margin-top: 4rem;
-  padding-block: 3rem;
-  display: grid;
-  grid-template-columns:
-    minmax(1rem, 1fr)
-    minmax(0, var(--max-width))
-    minmax(1rem, 1fr);
-  background-image: url("assets/explore.jpg");
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-around; /* This spreads out the child elements evenly */
+    align-items: flex-start; /* Aligns items to the top of the container */
 }
+
 
 .explore__content {
   grid-column: 2/3;
@@ -469,24 +491,104 @@ nav {
   background-color: var(--primary-color);
 }
 
-.footer {
-  background-color: var(--text-dark);
-}
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public-head" :: public-head>
+    <!-- Head elements including stylesheets and meta tags -->
+    <link rel="stylesheet" type="text/css" href="/css/stubooking.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
+<body class="d-flex h-100 text-center text-white bg-dark">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <!-- Header Section -->
+    <header th:replace="public-nav :: public-nav"></header>
+
+    <main class="px-3">
+        <div class="search-and-results-container">
+            <!-- Search Form -->
+            <section class="section__container search__container">
+                <h2 class="section__header">Search Bookings</h2>
+                <form th:action="@{/roombookings/search/page/1}" method="get" class="search-form">
+                    <div class="input__group">
+                        <input type="text" name="keyword" class="search-input" placeholder="Enter room code or name..." />
+                        <button type="submit" class="btn search-btn">Search</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Search Results Table -->
+            <section class="section__container search-results-container" th:if="${roombookings != null}">
+                <div class="table-responsive" th:if="${not #lists.isEmpty(roombookings)}">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Room Code</th>
+                            <th>Room Name</th>
+                            <th>Location</th>
+                            <th>Capacity</th>
+                            <th>Customer Name</th>
+                            <th>Phone Number</th>
+                            <th>Booking Date</th>
+                            <th>Booking Start Time</th>
+                            <th>Booking End Time</th>
+                            <th>Room Purpose</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="roombooking : ${roombookings}">
+                            <td th:text="${roombooking.id}"></td>
+                            <td th:text="${roombooking.code}"></td>
+                            <td th:text="${roombooking.roomName}"></td>
+                            <td th:text="${roombooking.location}"></td>
+                            <td th:text="${roombooking.capacity}"></td>
+                            <td th:text="${roombooking.customerName}"></td>
+                            <td th:text="${roombooking.phoneNumber}"></td>
+                            <td th:text="${#dates.format(roombooking.bookingDate, 'yyyy-MM-dd')}"></td>
+                            <td th:text="${#dates.format(roombooking.bookingTime, 'HH:mm')}"></td>
+                            <td th:text="${#dates.format(roombooking.bookingEnd, 'HH:mm')}"></td>
+                            <td th:text="${roombooking.roomPurpose}"></td>
+                            <td>
+                                <a th:href="@{/roombookings/edit/{id}(id=${roombooking.id})}" class="btn btn-primary">Edit</a>
+                                <a th:href="@{/roombookings/delete/{id}(id=${roombooking.id})}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:unless="${not #lists.isEmpty(roombookings)}">
+                    <p>No results found.</p>
+                </div>
+            </section>
+        </div> <!-- Closing tag for search-and-results-container -->
+    </main>
+</div> <!-- Closing tag for cover-container -->
+
+</body>
+</html>
+
+
 
 .footer__container {
   display: grid;
-  gap: 4rem 2rem;
+}
+
+.footer__col {
+    text-align: center;
 }
 
 .footer__col .section__description {
   margin-block: 2rem;
 }
 
-.footer__col h4 {
-  margin-bottom: 2rem;
-  font-size: 1.2rem;
+.footer__col h2 {
+  background: rgb(255,0,0);
+  background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(0,212,255,1) 100%);
   font-weight: 500;
-  color: var(--white);
+  color: white;
+
 }
 
 .footer__links {
@@ -558,6 +660,7 @@ nav {
   }
 
   .nav__links {
+    color: #00446e;
     padding: 0;
     width: unset;
     position: static;
@@ -565,6 +668,11 @@ nav {
     flex-direction: row;
     background-color: transparent;
   }
+
+  .nav__links a {
+      color: #00446e; /* Replace #yourColor with the hex code of the color you want */
+  }
+
 
   .nav__btn {
     display: block;

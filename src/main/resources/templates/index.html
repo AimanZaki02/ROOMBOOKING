@@ -4,30 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <head th:replace="public-head" :: public-head/>
-    <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
-            rel="stylesheet"
-    />
-
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/secondindex.css">
     <title>UPTMVBS</title>
-
-
 </head>
 <body>
 <header class="header">
-    <header th:replace="public-nav :: public-nav"></header>
+
     <nav>
+
         <div class="nav__bar">
             <div class="logo">
                 <a href="#"><img src="/images/UPTMLOGO.png" alt="logo" /></a>
             </div>
+            <header th:replace="public-nav :: public-nav"></header>
             <div class="nav__menu__btn" id="me  nu-btn">
                 <i class="ri-menu-line"></i>
             </div>
         </div>
         <ul class="nav__links" id="nav-links">
-            <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#room">Venue</a></li>
             <li><a href="#explore">Explore</a></li>
@@ -46,33 +41,22 @@
     </div>
 </header>
 
-<section class="section__container booking__container">
-    <form action="/" class="booking__form">
-        <div class="input__group input__btn">
-            <a>Need to book space for your upcoming event or project?</a><button sec:authorize="isAnonymous()" class="btn" ><a th:href="@{/login}">Click Here to Book!</a></button>
-        </div>
-    </form>
-</section>
-
 <section class="section__container about__container" id="about">
     <div class="about__image">
         <img src="/images/UPTMBG.jpeg" alt="about" />
     </div>
     <div class="about__content">
         <p class="section__subheader">About Our System</p>
-<!--        <h2 class="section__header">Now more easy!</h2>-->
         <p class="section__description">
             The UPTM Venue Booking System is tailored for the UPTM Community, comprising students, lecturers, and staff.
             We intend to enhance the venue booking system for increased convenience and eliminate redundant booking problems present in the current offline approach.        </p>
-        <div class="about__btn">
-            <button class="btn">Read More</button>
-        </div>
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-primary btn-book">Click Here to Book!</a>
     </div>
 </section>
-
+<br>
 <section class="section__container room__container" id="room">
-    <p class="section__subheader">UPTM Venues</p>
-    <h2 class="section__header">Exciting and Educational Event Starts Here.</h2>
+    <p class="section__subheader">VENUES @ UPTM</p>
+    <h2 class="section__header">Your Exciting Journey Starts Here</h2>
     <div class="room__grid">
         <div class="room__card">
             <div class="room__card__image">
@@ -81,9 +65,8 @@
             <div class="room__card__details">
                 <h4>Lecture Room</h4>
                 <p>
-                    Desc here.
+                    This lecture room is designed for educational sessions and academic presentations, including rows of desks confronting a central podium in a formal environment.
                 </p>
-                <button class="btn">Book Now</button>
             </div>
         </div>
         <div class="room__card">
@@ -93,9 +76,8 @@
             <div class="room__card__details">
                 <h4>Computer Lab</h4>
                 <p>
-                    Desc here.
+                    The lab is equipped with sophisticated computer workstations, serving as a center for technology education and digital discovery.
                 </p>
-                <button class="btn">Book Now</button>
             </div>
         </div>
         <div class="room__card">
@@ -105,9 +87,8 @@
             <div class="room__card__details">
                 <h4>Childhood Room</h4>
                 <p>
-                    Desc here.
+                    This area is specifically created for early childhood education, featuring a lively atmosphere with toys and resources that encourage learning and play for young children.
                 </p>
-                <button class="btn">Book Now</button>
             </div>
         </div>
         <div class="room__card">
@@ -117,9 +98,8 @@
             <div class="room__card__details">
                 <h4>Library</h4>
                 <p>
-                    Desc here.
+                    The library provides a peaceful setting for research, study, and reading, serving as a haven of knowledge.
                 </p>
-                <button class="btn">Book Now</button>
             </div>
         </div>
         <div class="room__card">
@@ -129,9 +109,8 @@
         <div class="room__card__details">
             <h4>Mac Lab</h4>
             <p>
-                Desc here.
+                The Mac lab, equipped with stylish Apple computers, serves as a hub for fostering creativity in digital arts and computing proficiency.
             </p>
-            <button class="btn">Book Now</button>
         </div>
     </div><div class="room__card">
         <div class="room__card__image">
@@ -140,9 +119,8 @@
         <div class="room__card__details">
             <h4>Music Room</h4>
             <p>
-                Desc here.
+                This area is designed for musicians to rehearse, play music, and be surrounded by instruments and sound equipment in an acoustically optimized environment.
             </p>
-            <button class="btn">Book Now</button>
         </div>
     </div><div class="room__card">
         <div class="room__card__image">
@@ -151,9 +129,8 @@
         <div class="room__card__details">
             <h4>Studio</h4>
             <p>
-                Desc here.
+                This studio is well-suited for dancing, rehearsals, and many types of movement arts due to its mirrored walls and ample floor space.
             </p>
-            <button class="btn">Book Now</button>
         </div>
     </div>
         <div class="room__card">
@@ -163,9 +140,8 @@
             <div class="room__card__details">
                 <h4>Surau</h4>
                 <p>
-                    Desc here.
+                    The surau offers a tranquil space for spiritual activities, contemplation, and prayer within the establishment.
                 </p>
-                <button class="btn">Book Now</button>
             </div>
         </div>
         <div class="room__card">
@@ -175,52 +151,58 @@
             <div class="room__card__details">
                 <h4>Futsal Court</h4>
                 <p>
-                    Desc here.
+                    This outdoor futsal court is open-air and provides a dynamic setting for students to participate in soccer matches and experience the excitement of outdoor sports.
                 </p>
-                <button class="btn">Book Now</button>
             </div>
         </div>
     </div>
-    <br>
-
-    <section class="explore" id="explore">
-        <p class="section__subheader">EXPLORE</p>
-        <h2 class="section__header">What's New Today.</h2>
-        <div class="explore__bg">
-            <div class="explore__content">
-                <p class="section__description">10th MAR 2023</p>
-                <h4>A New Menu Is Available In Our Hotel.</h4>
-            </div>
+</section>
+<br>
+<br>
+<section class="explore" id="explore">
+    <p class="section__subheader">EXPLORE EVENTS</p>
+    <h2 class="section__header">What's New Today?</h2>
+    <div class="explore__bg">
+        <div class="explore__content">
+            <p class="section__description">10th MAR 2023</p>
+            <h4>A New Menu Is Available In Our Hotel.</h4>
         </div>
-    </section>
 
+        <div class="explore__content">
+            <p class="section__description">11th MAR 2023</p>
+            <h4>A New Menu Is Available In Our Hotel.</h4>
+        </div>
+
+        <div class="explore__content">
+            <p class="section__description">13th MAR 2023</p>
+            <h4>A New Menu Is Available In Our Hotel.</h4>
+        </div>
+    </div>
 </section>
 
+
+<br>
 <br>
 <br>
 
 <footer class="footer" id="contact">
     <div class="section__container footer__container">
-        <div class="footer__col">
-            <div class="logo">
-               <a href="#home"><img src="/images/UPTMLOGO.png" alt="logo" /></a>
-            </div>
-            <h4>Connect With Us</h4>
-            <p class="section__description">
-                Jalan 6/91, Taman Shamelin Perkasa, 56100 Cheras, Kuala Lumpur
-                General Line: +603 9206 9700
-                Tel : +603 92837186 (Marketing)
-                >Fax : +603 92810475
+        <div class="footer__col" style="text-align: center;">
+            <h2>Connect With Us!</h2>
+            <p class="footer__col">
+                Jalan 6/91, Taman Shamelin Perkasa, 56100 Cheras, Kuala Lumpur<br>
+                General Line: +603 9206 9700<br>
+                Tel : +603 92837186 (Marketing)<br>
+                Fax : +603 92810475<br>
                 E-mail : marketing@uptm.edu.my
             </p>
-
-        </div>
         </div>
     </div>
     <div class="footer__bar">
         Copyright © University Poly-Tech Malaysia 2024. All rights reserved.
     </div>
 </footer>
+
 
 <script th:inline="javascript">
     /*<![CDATA[*/
