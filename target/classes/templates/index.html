@@ -70,100 +70,6 @@
     </div>
 </section>
 
-<!-- The action in form should be the URL mapped to the POST method in your Spring Controller -->
-<section class="section__container booking__container">
-    <h2 class="section__header">Add New Room</h2>
-    <form th:action="@{/saveRoom}" method="post" class="booking__form">
-    <div class="input__group">
-            <label for="code" class="section__description">Room Code:</label>
-            <input type="text" id="code" name="code" required maxlength="50" class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="location" class="section__description">Location:</label>
-            <input type="text" id="location" name="location" required maxlength="100" class="input__group input">
-        </div>
-        <div class="input__group">
-            <label for="capacity" class="section__description">Capacity:</label>
-            <input type="number" id="capacity" name="capacity" required min="1" class="input__group input">
-        </div>
-        <div>
-            <button type="submit" class="btn">Submit</button>
-        </div>
-    </form>
-</section>
-
-<div class="section__container table-container">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-            <tr class="table-secondary">
-                <th scope="col">ID</th>
-                <th scope="col">Code</th>
-                <th scope="col">Location</th>
-                <th scope="col">Capacity</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="room : ${rooms}">
-                <td th:text="${room.id}"></td>
-                <td th:text="${room.code}"></td>
-                <td th:text="${room.location}"></td>
-                <td th:text="${room.capacity}"></td>
-                <td>
-                    <a th:href="@{/room/edit/{id}(id=${room.id})}" class="btn btn-primary">Edit</a>
-                    <a th:href="@{/room/delete/{id}(id=${room.id})}" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<section class="section__container search__container">
-    <h2 class="section__header">Search Rooms</h2>
-    <form th:action="@{/room/search/page/1}" method="get" class="search-form">
-        <div class="input__group">
-            <input type="text" name="keyword" placeholder="Search by code, location, etc." class="search-input">
-            <button type="submit" class="btn search-btn">Search</button>
-        </div>
-    </form>
-</section>
-
-<section class="section__container" th:if="${rooms != null}">
-    <h2 class="section__header">Search Results</h2>
-    <div class="table-responsive" th:if="${not #lists.isEmpty(rooms)}">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Code</th>
-                <th>Location</th>
-                <th>Capacity</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="room : ${rooms}">
-                <td th:text="${room.id}"></td>
-                <td th:text="${room.code}"></td>
-                <td th:text="${room.location}"></td>
-                <td th:text="${room.capacity}"></td>
-                <td>
-                    <a th:href="@{/room/edit/{id}(id=${room.id})}" class="btn btn-primary">Edit</a>
-                    <a th:href="@{/room/delete/{id}(id=${room.id})}" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div th:unless="${not #lists.isEmpty(rooms)}">
-        <p>No results found.</p>
-    </div>
-</section>
-
-
-
 <section class="section__container room__container" id="room">
     <p class="section__subheader">UPTM Venues</p>
     <h2 class="section__header">Exciting and Educational Event Starts Here.</h2>
@@ -201,6 +107,7 @@
                 <p>
                     Desc here.
                 </p>
+                <button class="btn">Book Now</button>
             </div>
         </div>
         <div class="room__card">
@@ -274,20 +181,23 @@
             </div>
         </div>
     </div>
-</section>
+    <br>
 
-
-<section class="explore" id="explore">
-    <p class="section__subheader">EXPLORE</p>
-    <h2 class="section__header">What's New Today.</h2>
-    <div class="explore__bg">
-        <div class="explore__content">
-            <p class="section__description">10th MAR 2023</p>
-            <h4>A New Menu Is Available In Our Hotel.</h4>
-            <button class="btn">Continue</button>
+    <section class="explore" id="explore">
+        <p class="section__subheader">EXPLORE</p>
+        <h2 class="section__header">What's New Today.</h2>
+        <div class="explore__bg">
+            <div class="explore__content">
+                <p class="section__description">10th MAR 2023</p>
+                <h4>A New Menu Is Available In Our Hotel.</h4>
+            </div>
         </div>
-    </div>
+    </section>
+
 </section>
+
+<br>
+<br>
 
 <footer class="footer" id="contact">
     <div class="section__container footer__container">

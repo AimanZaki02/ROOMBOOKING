@@ -1,48 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="public-head" :: public-head/>
-<link rel="stylesheet" type="text/css" href="/css/subject.css">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
-
+<head th:replace="public-head" :: public-head>
+    <!-- Head elements including stylesheets and meta tags -->
+    <link rel="stylesheet" type="text/css" href="/css/stubooking.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
 <body class="d-flex h-100 text-center text-white bg-dark">
+
 <div class="w-100 h-100 img-wrap">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <!-- Header Section -->
         <header th:replace="public-nav :: public-nav"></header>
+
         <main class="px-3">
+            <div class="search-and-results-container">
+                <!-- Search Form -->
+                <section class="section__container search__container">
+                    <h2 class="section__header">Search Bookings</h2>
+                    <form th:action="@{/roombookings/search/page/1}" method="get" class="search-form">
+                        <div class="input__group">
+                            <input type="text" name="keyword" class="search-input" placeholder="Enter room code or name..." />
+                            <button type="submit" class="btn search-btn">Search</button>
+                        </div>
+                    </form>
+                </section>
 
-            <section class="section__container" th:if="${rooms != null}">
-                <h2 class="section__header">Search Results</h2>
-                <div class="table-responsive" th:if="${not #lists.isEmpty(rooms)}">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Code</th>
-                            <th>Location</th>
-                            <th>Capacity</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="room : ${rooms}">
-                            <td th:text="${room.id}"></td>
-                            <td th:text="${room.code}"></td>
-                            <td th:text="${room.location}"></td>
-                            <td th:text="${room.capacity}"></td>
-                            <td>
-                                <a th:href="@{/room/edit/{id}(id=${room.id})}" class="btn btn-primary">Edit</a>
-                                <a th:href="@{/room/delete/{id}(id=${room.id})}" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div th:unless="${not #lists.isEmpty(rooms)}">
-                    <p>No results found.</p>
-                </div>
-            </section>
-
-        <footer th:replace="public-footer :: public-footer"></footer>
+                <!-- Search Results Table -->
+                <section class="section__container search-results-container" th:if="${roombookings != null}">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(roombookings)}">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Room Code</th>
+                                <th>Room Name</th>
+                                <th>Location</th>
+                                <th>Capacity</th>
+                                <th>Customer Name</th>
+                                <th>Phone Number</th>
+                                <th>Booking Date</th>
+                                <th>Booking Start Time</th>
+                                <th>Booking End Time</th>
+                                <th>Room Purpose</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="roombooking : ${roombookings}">
+                                <td th:text="${roombooking.id}"></td>
+                                <td th:text="${roombooking.code}"></td>
+                                <td th:text="${roombooking.roomName}"></td>
+                                <td th:text="${roombooking.location}"></td>
+                                <td th:text="${roombooking.capacity}"></td>
+                                <td th:text="${roombooking.customerName}"></td>
+                                <td th:text="${roombooking.phoneNumber}"></td>
+                                <td th:text="${#dates.format(roombooking.bookingDate, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${#dates.format(roombooking.bookingTime, 'HH:mm')}"></td>
+                                <td th:text="${#dates.format(roombooking.bookingEnd, 'HH:mm')}"></td>
+                                <td th:text="${roombooking.roomPurpose}"></td>
+                                <td>
+                                    <a th:href="@{/roombookings/edit/{id}(id=${roombooking.id})}" class="btn btn-primary">Edit</a>
+                                    <a th:href="@{/roombookings/delete/{id}(id=${roombooking.id})}" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:unless="${not #lists.isEmpty(roombookings)}">
+                        <p>No results found.</p>
+                    </div>
+                </section>
+        </main>
     </div>
 </div>
 </body>
