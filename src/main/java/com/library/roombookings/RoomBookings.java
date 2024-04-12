@@ -12,8 +12,8 @@ public class RoomBookings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "room_purpose", nullable = false, length = 50)
-    private String roomPurpose;
+    @Column(name = "room_code", nullable = false, length = 50)
+    private String roomCode;
 
     @Column(name = "room_name", nullable = false, length = 100)
     private String roomName;
@@ -33,6 +33,9 @@ public class RoomBookings {
     @Column(name = "booking_end", nullable = false)
     private Time bookingEnd;
 
+    @Column(name = "room_purpose", nullable = false, length = 50)
+    private String roomPurpose;
+
     // Getters and setters
 
     public Integer getId() {
@@ -43,12 +46,12 @@ public class RoomBookings {
         this.id = id;
     }
 
-    public String getRoomPurpose() {
-        return roomPurpose;
+    public String getRoomCode() {
+        return roomCode;
     }
 
-    public void setRoomPurpose(String roomPurpose) {
-        this.roomPurpose = roomPurpose;
+    public void setRoomCode(String roomCode) {
+        this.roomCode = roomCode;
     }
 
     public String getRoomName() {
@@ -99,6 +102,14 @@ public class RoomBookings {
         this.bookingEnd = bookingEnd;
     }
 
+    public String getRoomPurpose() {
+        return roomPurpose;
+    }
+
+    public void setRoomPurpose(String roomPurpose) {
+        this.roomPurpose = roomPurpose;
+    }
+
     // Override equals and hashCode
 
     @Override
@@ -121,14 +132,15 @@ public class RoomBookings {
     @Override
     public String toString() {
         return "RoomBookings{" +
-                "id=" + id +
-                ", roomPurpose='" + roomPurpose + '\'' +
-                ", roomName='" + roomName + '\'' + // Add roomName to toString method
-                ", customerName='" + customerName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", bookingDate=" + bookingDate +
-                ", bookingTime=" + bookingTime +
-                ", bookingEnd=" + bookingEnd +
+                "id=" + getId() +
+                ", roomCode='" + getRoomCode() + '\'' +
+                ", roomName='" + getRoomName() + '\'' +
+                ", customerName='" + getCustomerName() + '\'' +
+                ", phoneNumber='" + getPhoneNumber() + '\'' +
+                ", bookingDate=" + getBookingDate() +
+                ", bookingTime=" + getBookingTime() +
+                ", bookingEnd=" + getBookingEnd() +
+                ", roomPurpose='" + getRoomPurpose() + '\'' +
                 '}';
     }
 }

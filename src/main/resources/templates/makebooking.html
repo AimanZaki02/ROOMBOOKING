@@ -1,89 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="public-head" :: public-head>
+<head th:replace="public-head :: public-head">
     <!-- Head elements including stylesheets and meta tags -->
     <link rel="stylesheet" type="text/css" href="/css/stubooking.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
-    <!DOCTYPE html>
-    <html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="public-head" :: public-head>
-        <!-- Head elements including stylesheets and meta tags -->
-        <link rel="stylesheet" type="text/css" href="/css/stubooking.css">
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
-    </head>
-    <body class="d-flex h-100 text-center text-white bg-dark">
-
-    <div class="w-100 h-100 img-wrap">
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-
-            <!-- Header Section -->
-            <header th:replace="public-nav :: public-nav"></header>
 </head>
 <body class="d-flex h-100 text-center text-white bg-dark">
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+<div class="w-100 h-100 img-wrap">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+        <!-- Header Section -->
+        <header th:replace="public-nav :: public-nav"></header>
+
         <!-- Main Content -->
-        <main class="">
-            <!-- Booking Form Section -->
-            <section class="section__container form-container">
-                <h2 class="section__header">Book a Room</h2>
-                <form th:action="@{/saveBooking}" method="post" class="booking-form">
-                <div class="form-row">
-                        <label for="roomPurpose" class="section__description">Purpose:</label>
-                        <input type="text" id="roomPurpose" name="roomPurpose" required class="input">
-                    </div>
-                    <div class="form-row">
-                        <label for="roomName" class="section__description">Room Name:</label>
-                        <input type="text" id="roomName" name="roomName" required class="input">
-                    </div>
-                    <div class="form-row">
-                        <label for="customerName" class="section__description">Your Name:</label>
-                        <input type="text" id="customerName" name="customerName" required class="input">
-                    </div>
-                    <div class="form-row">
-                        <label for="phoneNumber" class="section__description">Phone Number:</label>
-                        <input type="tel" id="phoneNumber" name="phoneNumber" required class="input">
-                    </div>
-                    <div class="form-row">
-                        <label for="bookingDate" class="section__description">Date:</label>
-                        <input type="date" id="bookingDate" name="bookingDate" required class="input">
-                    </div>
-                    <div class="form-row">
-                        <label for="bookingTime" class="section__description">Time Start:</label>
-                        <input type="time" id="bookingTime" name="bookingTime" required class="input">
-                    </div>
-                    <div class="form-row">
-                        <label for="bookingEnd" class="section__description">Time End:</label>
-                        <input type="time" id="bookingEnd" name="bookingEnd" required class="input">
-                    </div>
-                    <div class="form-row">
-                        <button type="submit" class="btn">Book Now</button>
-                    </div>
-                </form>
+        <main class="px-3">
+            <section class="section__container search-and-results-container">
+                <!-- Booking Form Section -->
+                <section class="section__container form-container">
+                    <h2>Room Booking Form</h2>
+
+                    <form action="/saveBooking" method="post">
+                        <label for="roomCode">Room Code:</label><br>
+                        <input type="text" id="roomCode" name="roomCode" maxlength="50" required><br>
+
+                        <label for="roomName">Room Name:</label><br>
+                        <input type="text" id="roomName" name="roomName" maxlength="100" required><br>
+
+                        <label for="customerName">Customer Name:</label><br>
+                        <input type="text" id="customerName" name="customerName" maxlength="100" required><br>
+
+                        <label for="phoneNumber">Phone Number:</label><br>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" maxlength="15" required><br>
+
+                        <label for="bookingDate">Booking Date:</label><br>
+                        <input type="date" id="bookingDate" name="bookingDate" required><br>
+
+                        <label for="bookingTime">Booking Time:</label><br>
+                        <input type="time" id="bookingTime" name="bookingTime" required><br>
+
+                        <label for="bookingEnd">Booking End Time:</label><br>
+                        <input type="time" id="bookingEnd" name="bookingEnd" required><br>
+
+                        <label for="roomPurpose">Room Purpose:</label><br>
+                        <input type="text" id="roomPurpose" name="roomPurpose" maxlength="50" required><br><br>
+
+                        <input type="submit" value="Submit Booking">
+                    </form>
+                </section>
             </section>
         </main>
+
+        <!-- Footer Section -->
+        <footer th:replace="public-footer :: public-footer"></footer>
+
     </div>
 </div>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var swalAttribute = /*[[${swal}]]*/ 'none';
-    var message = /*[[${message}]]*/ 'default message';
-    console.log('Swal attribute:', swalAttribute);
-    console.log('Message:', message);
 
-    if (swalAttribute === 'success') {
-        Swal.fire({
-            title: 'Success!',
-            text: message !== 'default message' ? message : 'Action completed successfully!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(function(result) {
-            if (result.isConfirmed) {
-                window.location.href = '/secondindex';
-            }
-        });
-    }
-    /*]]>*/
-</script>
 </body>
-<footer></footer>
 </html>
