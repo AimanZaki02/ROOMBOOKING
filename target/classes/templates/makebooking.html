@@ -4,6 +4,7 @@
     <!-- Head elements including stylesheets and meta tags -->
     <link rel="stylesheet" type="text/css" href="/css/stubooking.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="d-flex h-100 text-center text-white bg-dark">
 
@@ -20,7 +21,10 @@
                 <section class="section__container form-container">
                     <h2>Room Booking Form</h2>
 
-                    <form action="/saveBooking" method="post">
+                    <form action="/saveBooking" method="post" th:action="@{/saveBooking}">
+                        <!-- CSRF Token added for security -->
+                        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
                         <label for="roomCode">Room Code:</label><br>
                         <input type="text" id="roomCode" name="roomCode" maxlength="50" required><br>
 
@@ -56,6 +60,26 @@
 
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var swalAttribute = /*[[${swal}]]*/ 'none';
+    var message = /*[[${message}]]*/ 'default message';
 
+    if (swalAttribute === 'success') {
+        Swal.fire({
+            title: 'Success!',
+            text: message !== 'default message' ? message : 'Action completed successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            timer: 5000,  // Close automatically after 5 seconds
+            timerProgressBar: true,  // Show a timer progress bar
+            willClose: () => {
+                window.location.href = '/makebooking'; // Redirect when the modal is closed
+            }
+        });
+    }
+    /*]]>*/
+</script>
 </body>
 </html>

@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
-    // Annotate as query
+// Annotate as query
     // We create a custom query to implement full text searches for columns...
     // isbn, title, genre
     // Here, nativeQuery = true means it is a native database query (MySQL)
