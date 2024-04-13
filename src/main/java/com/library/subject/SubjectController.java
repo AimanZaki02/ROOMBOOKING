@@ -14,7 +14,7 @@ import java.util.List;
 
 // Specify as Controller class so that it gets detected in scanning
 @Controller
-public class    SubjectController {
+public class SubjectController {
 
     // Inject an instance of studentService as studentService
     @Autowired

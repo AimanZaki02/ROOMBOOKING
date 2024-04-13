@@ -19,7 +19,7 @@
 
             <a sec:authorize="hasRole('ADMIN')"
                th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/subject') ? 'active':''}"
-               class="nav-link" th:href="@{/admin/subject}">Manage Class</a>
+               class="nav-link" th:href="@{/admin/searchBooking}">Manage Class</a>
 
             <a sec:authorize="isAuthenticated()"
                th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active':''}" class="nav-link"

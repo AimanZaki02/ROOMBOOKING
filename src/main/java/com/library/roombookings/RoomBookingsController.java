@@ -147,17 +147,7 @@ public class RoomBookingsController {
         }
     }
 
-    // Map HTTP GET requests for '/roombookings/search/page/{pageNum}'
-    @GetMapping("/roombookings/search/page/{pageNum}")
-    public String searchByPage(@PathVariable(name = "pageNum") int pageNum, @RequestParam(value = "keyword", required = false) String keyword, Model model) {
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            Page<RoomBookings> result = roombookingsService.search(keyword, pageNum);
-            model.addAttribute("roombookings", result.getContent());
-            model.addAttribute("totalPages", result.getTotalPages());
-            model.addAttribute("currentPage", pageNum);
-            model.addAttribute("totalItems", result.getTotalElements());
-            model.addAttribute("keyword", keyword);
-        }
-        return "admin/subject";// Use secondindex to render the same page with search results
-    }
+
+
+
 }
