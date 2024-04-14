@@ -113,10 +113,10 @@ public class RoomBookingsController {
         try {
             RoomBookings booking = roombookingsService.get(id);
             model.addAttribute("booking", booking);
-            return "editRoomBookings"; // Ensure this is the correct Thymeleaf template
+            return "editRoomBookings.html"; // Ensure this is the correct Thymeleaf template
         } catch (RoomBookingsNotFoundException e) {
             logger.error("Error finding booking: " + e.getMessage());
-            return "redirect:/makebooking"; // Modify as necessary
+            return "admin/searchBooking";
         }
     }
 
@@ -126,11 +126,11 @@ public class RoomBookingsController {
             booking.setId(id);
             roombookingsService.save(booking);
             redirectAttributes.addFlashAttribute("message", "Booking updated successfully!");
-            return "redirect:/makebooking"; // Modify as necessary
+            return "admin/searchBooking";
         } catch (Exception e) {
             logger.error("Error updating booking: " + e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "Error updating booking: " + e.getMessage());
-            return "redirect:/makebooking"; // Modify as necessary
+            return "admin/searchBooking";
         }
     }
 
@@ -139,11 +139,11 @@ public class RoomBookingsController {
         try {
             roombookingsService.delete(id);
             redirectAttributes.addFlashAttribute("message", "Booking deleted successfully!");
-            return "redirect:/makebooking"; // Modify as necessary
+            return "admin/searchBooking";
         } catch (RoomBookingsNotFoundException e) {
             logger.error("Error deleting booking: " + e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "Error deleting booking: " + e.getMessage());
-            return "redirect:/makebooking"; // Modify as necessary
+            return "admin/searchBooking";
         }
     }
 }

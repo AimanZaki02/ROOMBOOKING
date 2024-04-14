@@ -57,7 +57,7 @@ public class RoomController {
             return "editRoom"; // This should be the name of the Thymeleaf template for editing the room
         } catch (RoomNotFoundException e) {
             logger.error("Error finding room: " + e.getMessage());
-            return "admin/student";
+            return "admin/manageroom";
         }
     }
 
@@ -67,11 +67,11 @@ public class RoomController {
             room.setId(id);
             roomService.save(room);
             redirectAttributes.addFlashAttribute("message", "Room updated successfully!");
-            return "redirect:admin/student";
+            return "admin/manageroom";
         } catch (Exception e) {
             logger.error("Error updating room: " + e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "Error updating room: " + e.getMessage());
-            return "admin/student";
+            return "admin/manageroom";
         }
     }
 
@@ -80,11 +80,11 @@ public class RoomController {
         try {
             roomService.delete(id);
             redirectAttributes.addFlashAttribute("message", "Room deleted successfully!");
-            return "redirect:admin/student";
+            return "admin/manageroom";
         } catch (RoomNotFoundException e) {
             logger.error("Error deleting room: " + e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "Error deleting room: " + e.getMessage());
-            return "redirect:admin/student";
+            return "admin/manageroom";
         }
     }
 
@@ -99,6 +99,6 @@ public class RoomController {
             model.addAttribute("totalItems", result.getTotalElements());
             model.addAttribute("keyword", keyword);
         }
-        return "admin/student";// Use secondindex to render the same page with search results
+        return "admin/manageroom";// Use secondindex to render the same page with search results
     }
 }

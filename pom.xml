@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.library</groupId>
-	<artifactId>WaiTuition</artifactId>
+	<artifactId>UPTMVBS</artifactId>
 	<version>lms-snapshot</version>
 	<name>LibraryApp</name>
 	<description>Library Management System</description>

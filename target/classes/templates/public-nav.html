@@ -22,8 +22,8 @@
                class="nav-link" th:href="@{/admin/createroom}">Create Room</a>
 
             <a sec:authorize="hasRole('ADMIN')"
-               th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/student') ? 'active':''}"
-               class="nav-link" th:href="@{/admin/student}">Manage Room</a>
+               th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/manageroom') ? 'active':''}"
+               class="nav-link" th:href="@{/admin/manageroom}">Manage Room</a>
 
             <a sec:authorize="hasRole('ADMIN')"
                th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/subject') ? 'active':''}"
