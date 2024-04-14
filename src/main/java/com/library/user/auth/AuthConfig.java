@@ -59,12 +59,12 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
         // Additionally, we create a user account to be inserted into the RAM...
         // at runtime.
         // Specify the password, then encode it
-        String password = passwordEncoder().encode("admin123");
+        String password = passwordEncoder().encode("uptm123");
         // To be inserted in memory
         auth.inMemoryAuthentication()
                 // Create user admin@library.com with the encoded password...
                 // and give the user ADMIN role
-                .withUser("admin@tadika.com").password(password).roles("ADMIN");
+                .withUser("admin@uptm.edu.my").password(password).roles("ADMIN");
     }
 
     // Annotate as override method
