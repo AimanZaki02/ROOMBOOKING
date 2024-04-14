@@ -67,7 +67,7 @@ public class RoomController {
             room.setId(id);
             roomService.save(room);
             redirectAttributes.addFlashAttribute("message", "Room updated successfully!");
-            return "redirect:/secondindex";
+            return "redirect:admin/student";
         } catch (Exception e) {
             logger.error("Error updating room: " + e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "Error updating room: " + e.getMessage());
@@ -80,11 +80,11 @@ public class RoomController {
         try {
             roomService.delete(id);
             redirectAttributes.addFlashAttribute("message", "Room deleted successfully!");
-            return "redirect:/secondindex";
+            return "redirect:admin/student";
         } catch (RoomNotFoundException e) {
             logger.error("Error deleting room: " + e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "Error deleting room: " + e.getMessage());
-            return "redirect:/secondindex";
+            return "redirect:admin/student";
         }
     }
 

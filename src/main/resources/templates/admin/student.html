@@ -19,26 +19,6 @@
     <main class="px-3">
 
         <!-- The action in form should be the URL mapped to the POST method in your Spring Controller -->
-
-        <section class="section__container booking__container">
-            <h2 class="section__header">Add New Room</h2>
-            <form th:action="@{/saveRoom}" method="post" class="booking__form">
-                <div class="input__group">
-                    <label for="code">Room Code:</label>
-                    <input type="text" id="code" name="code" required maxlength="50">
-                </div>
-                <div class="input__group">
-                    <label for="location">Room Name:</label>
-                    <input type="text" id="location" name="location" required maxlength="100">
-                </div>
-                <div class="input__group">
-                    <label for="capacity">Capacity:</label>
-                    <input type="number" id="capacity" name="capacity" required min="1">
-                </div>
-                <button type="submit" class="btn">Submit</button>
-            </form>
-        </section>
-
         <div class="search-and-results-container">
             <section class="section__container search__container">
                 <h2 class="section__header">Search Rooms</h2>
