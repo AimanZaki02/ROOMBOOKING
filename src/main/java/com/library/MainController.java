@@ -62,6 +62,16 @@ public class MainController {
         return "makebooking";
     }
 
+    @GetMapping("/admin/createroom")
+    public String createroom(Model model, @ModelAttribute("message") String message,
+                              @ModelAttribute("swal") String swal,
+                              @ModelAttribute("errorMessage") String errorMessage) {
+        model.addAttribute("message", message);
+        model.addAttribute("swal", swal);
+        model.addAttribute("errorMessage", errorMessage);
+        return "/admin/createroom";
+    }
+
     @GetMapping("/liveTracking")
     public String liveTracking(Model model) {
         logger.debug("Entering liveTracking method");

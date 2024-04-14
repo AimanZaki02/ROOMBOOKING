@@ -170,7 +170,7 @@ public class    AdminController {
         // Return templates/admin/searchStudent.html
         return "admin/searchStudent";
     }
-//________________________________________________________________________________________________________________________________________________________________
+    //________________________________________________________________________________________________________________________________________________________________
     // Map HTTP GET requests for '/admin/student'
     @GetMapping("/admin/subject")
     public String adminSubject(Model model) {
@@ -258,7 +258,7 @@ public class    AdminController {
     // Map HTTP GET requests for '/admin/student/search/page/{pageNum}'
     @GetMapping("/admin/subject/subjectSearch/page/{pageNum}")
     public String searchByPage2(String keyword, Model model,
-                               @PathVariable(name = "pageNum") int pageNum) {
+                                @PathVariable(name = "pageNum") int pageNum) {
 
         // Get current page search results
         Page<Subject> result = subjectService.search(keyword, pageNum);

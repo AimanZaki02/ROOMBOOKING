@@ -146,8 +146,4 @@ public class RoomBookingsController {
             return "redirect:/makebooking"; // Modify as necessary
         }
     }
-
-
-
-
 }

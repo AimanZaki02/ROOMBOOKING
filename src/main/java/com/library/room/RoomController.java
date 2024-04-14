@@ -35,17 +35,17 @@ public class RoomController {
             bindingResult.getAllErrors().forEach(error -> logger.error("Validation error: " + error.toString()));
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.room", bindingResult);
             redirectAttributes.addFlashAttribute("room", room);
-            return "admin/student";
+            return "admin/createroom";
         }
         try {
             roomService.save(room);
             redirectAttributes.addFlashAttribute("swal", "success");
             redirectAttributes.addFlashAttribute("message", "Room saved successfully!");
-            return "admin/student";
+            return "admin/createroom";
         } catch (Exception e) {
             logger.error("Exception occurred during room save", e);
             redirectAttributes.addFlashAttribute("errorMessage", "Error saving room: " + e.getMessage());
-            return "admin/student";
+            return "admin/createroom";
         }
     }
 

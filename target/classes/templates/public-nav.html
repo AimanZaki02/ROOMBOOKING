@@ -6,6 +6,10 @@
                aria-current="page" th:href="@{/}">Home</a>
 
             <a sec:authorize="isAuthenticated()"
+               th:classappend="${#httpServletRequest.getRequestURI().contains('/liveTracking') and !#httpServletRequest.getRequestURI().contains('/admin') ? 'active':''}"
+               class="nav-link" th:href="@{/liveTracking}">Room Update</a>
+
+            <a sec:authorize="isAuthenticated()"
                th:classappend="${#httpServletRequest.getRequestURI().contains('/makebooking') and !#httpServletRequest.getRequestURI().contains('/admin') ? 'active':''}"
                class="nav-link" th:href="@{/makebooking}">Make Booking</a>
 
@@ -14,12 +18,16 @@
                th:href="@{/login}">Login</a>
 
             <a sec:authorize="hasRole('ADMIN')"
+               th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/createroom') ? 'active':''}"
+               class="nav-link" th:href="@{/admin/createroom}">Create Room</a>
+
+            <a sec:authorize="hasRole('ADMIN')"
                th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/student') ? 'active':''}"
                class="nav-link" th:href="@{/admin/student}">Manage Room</a>
 
             <a sec:authorize="hasRole('ADMIN')"
                th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/subject') ? 'active':''}"
-               class="nav-link" th:href="@{/admin/searchBooking}">Manage Class</a>
+               class="nav-link" th:href="@{/admin/searchBooking}">Manage Booking</a>
 
             <a sec:authorize="isAuthenticated()"
                th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active':''}" class="nav-link"

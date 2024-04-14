@@ -140,4 +140,18 @@ body {
     }
 }
 
-/* Additional media queries and styles as needed */
+/* Reducing the top padding of the main content area */
+main.px-3 {
+}
+
+/* If there's a top margin or padding in the search and results container, reduce it */
+.search-and-results-container {
+    margin-top: 0;
+    padding-top: 0; /* Adjust or add this line to reduce the space */
+}
+
+/* If the sections themselves have padding or margin pushing them down, reduce it */
+.section__container {
+    padding-top: 0; /* Adjust or add this line to reduce the space */
+    margin-top: 0; /* Adjust or add this line if necessary */
+}

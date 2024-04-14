@@ -28,7 +28,7 @@
                     <input type="text" id="code" name="code" required maxlength="50">
                 </div>
                 <div class="input__group">
-                    <label for="location">Location:</label>
+                    <label for="location">Room Name:</label>
                     <input type="text" id="location" name="location" required maxlength="100">
                 </div>
                 <div class="input__group">
@@ -44,16 +44,13 @@
                 <h2 class="section__header">Search Rooms</h2>
                 <form th:action="@{/room/search/page/1}" method="get" class="search-form">
                     <div class="input__group">
-                        <select name="keyword" class="search-input">
-                            <option value="">Select a room...</option>
-                            <option value="Room 1">Room 1</option>
-                            <option value="Room 2">Room 2</option>
-                            <option value="Room 3">Room 3</option>
-                            <!-- Add more options as needed -->
-                        </select>
+                        <input type="text" name="keyword" class="search-input" placeholder="Enter room code or name..." />
                         <button type="submit" class="btn search-btn">Search</button>
                     </div>
                 </form>
+            </section>
+        </div>
+
 
 
             <section class="section__container search-results-container" th:if="${rooms != null}">
@@ -63,7 +60,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Code</th>
-                        <th>Location</th>
+                        <th>Room Name</th>
                         <th>Capacity</th>
                         <th>Actions</th>
                     </tr>
@@ -88,6 +85,8 @@
         </section>
 
     </main>
+</div>
+</div>
 </div>
 </body>
 </html>
